@@ -1,67 +1,95 @@
+/*Definicion de parametro de tamaño de objetocs*/
+
+.all_size {
+    font-size: 1em;
+}
+
+
 /*Configuracion del fondo de la pagina html*/
 
-html {
-    background-image: url("../Images/background.png");
+.back {
+    width: 100%;
+    height: 100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
     background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    z-index: -10;
 }
 
 
-/*Ajuste centrado y adaptable para el logo de TicSoft*/
-
-.logo {
-    text-align: center;
-    width: auto;
-    height: auto;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-
-/*Diseño del contenedor para botones, label y lista desplegable */
+/*Diseño del contenedor para botones y lista desplegable */
 
 .container {
     text-align: center;
-    width: 30%;
-    height: 45%;
-    min-width: 400px;
-    margin-top: 2%;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 2%;
+    width: 28em;
+    height: 30em;
+    margin-right: 10em;
+    margin-top: -36.5em;
     padding: 1%;
-    border-style: inset;
+    border-style: outset;
     border-radius: 15px;
     border-color: rgb(156, 146, 146);
-    background-color: lightsteelblue;
-    box-shadow: 0px 0px 10px 15px rgba(30, 100, 220, 0.4);
+    background-color: transparent;
+    box-shadow: 0px 0px 25px 10px rgb(55, 166, 147);
+    z-index: initial;
+    position: relative;
 }
 
 
-/*Diseño unico para los label del login*/
+/* Ajuste de la imagen de usuario grande*/
 
-.login {
+.img_user {
+    position: relative;
     text-align: center;
-    margin-top: 2%;
-    font-family: Helvetica;
-    font-weight: bold;
+    width: 100%;
+    height: 45%;
+    padding-bottom: 15px;
+    margin: 3px;
 }
 
 
-/*Diseño unico para los input box*/
+/* Modificacion de la clase de W3 (online) para ajustar colores
+box-shadow: 0px 0px 8px 0px rgb(55, 166, 147) !important; */
 
-.input_log {
-    align-items: center;
-    font-family: Helvetica;
-    font-size: 15px;
-    height: 30px;
-    width: 200px;
-    margin: 3%;
-    border-radius: 5px;
-    border-top: 0px;
-    border-left: 0px;
-    border-right: 0px;
-    border-bottom: 0px;
-    box-shadow: 0px 0px 0px 5px rgba(0, 0, 0, 0.3);
+input.form-control:focus {
+    box-shadow: 0px 0px 8px 0px rgb(55, 166, 147);
+    color: black;
+}
+
+
+/* Configuracion para ajustar los campos de login en linea y no debajo del span*/
+
+.in_line {
+    width: 100%;
+    display: inline-flex;
+    padding: 8px;
+}
+
+
+/* Modificacion del tamaño de los iconos de login*/
+
+.icon {
+    width: 80%;
+    height: 80%;
+    object-fit: contain;
+    padding: 0%;
+}
+
+
+/* Modifica la posicion y aspecto de los icon al lado de los campos de login*/
+
+span.input-group-text {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    padding: 0%;
+    background-color: black;
+    width: 40px;
+    height: 40px;
+    border-color: white;
 }
 
 
@@ -78,8 +106,8 @@ html {
     width: 200px;
     max-width: 100%;
     box-sizing: border-box;
-    margin: 0;
-    border: 1px solid #aaa;
+    margin-bottom: 5px;
+    border: 2px solid rgb(61, 60, 60);
     box-shadow: 0 1px 0 1px rgba(0, 0, 0, .03);
     border-radius: .3em;
     -moz-appearance: none;
@@ -122,11 +150,12 @@ codigo fuente de internet url:https://www.w3schools.com/css/css3_buttons.asp*/
     font-size: 25px;
     width: 200px;
     margin: 10px;
-    padding: 12px;
+    margin-top: -5px;
+    padding: 10px;
     border: none;
     border-radius: 20px;
-    background-color: rgba(10, 10, 210, 0.675);
-    color: rgb(8, 0, 83);
+    background-color: rgb(55, 166, 147);
+    color: white;
     transition: all 0.2s;
     cursor: pointer;
 }
@@ -181,5 +210,6 @@ codigo fuente de internet url:https://www.w3schools.com/css/css3_buttons.asp*/
 .foot {
     text-align: center;
     font-family: Helvetica;
-    color: gray;
+    color: #fff;
+    text-shadow: 0 0 7px #fff, 0 0 10px #fff, 0 0 21px #fff, 0 0 42px #0fa, 0 0 82px #0fa, 0 0 92px #0fa, 0 0 102px #0fa, 0 0 151px #0fa;
 }
