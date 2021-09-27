@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
 import './App.css'
-import {container} from "./components/container";
-import {navbar} from "./components/navbar";
-import {micomponente} from "./components/micomponente";
+
+import NavBarContador from "./components/navbar";
+import Containertest from "./components/container";
+import Greeting from './components/navbar';
 
 class App extends Component {
   render() {
     return (
-        <section className="componentes">
-        <micomponente />
-        </section>
+      <Greeting isLoggedIn={false}/>
     );
   }
 }

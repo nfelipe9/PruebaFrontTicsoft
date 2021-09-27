@@ -1,11 +1,9 @@
 import React from 'react'
 
 import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
-import Nav from 'react-bootstrap/Nav';
 import Container from 'react-bootstrap/Container';
 
-export function navbar() {
+function NavbarAdmin (props) {
     return (
         <Navbar bg="dark" variant="dark">
         <Container>
@@ -20,3 +18,45 @@ export function navbar() {
         </Navbar>
     )
 }
+
+function NavbarVendor (props) {
+    return (
+        <Navbar bg="dark" variant="dark">
+        <Container>
+            <Navbar.Brand href="#home">Vendedor</Navbar.Brand>
+            <Navbar.Toggle />
+            <Navbar.Collapse className="justify-content-end">
+            <Navbar.Text>
+                Bienvenido: <a href="#login">@Username</a>
+            </Navbar.Text>
+            </Navbar.Collapse>
+        </Container>
+        </Navbar>
+    )
+}
+
+function NavbarGuest (props) {
+    return (
+        <Navbar bg="dark" variant="dark">
+        <Container>
+            <Navbar.Brand href="#home">Invitado</Navbar.Brand>
+            <Navbar.Toggle />
+            <Navbar.Collapse className="justify-content-end">
+            <Navbar.Text>
+                Bienvenido: <a href="#login">@Username</a>
+            </Navbar.Text>
+            </Navbar.Collapse>
+        </Container>
+        </Navbar>
+    )
+}
+
+function Greeting(props) {
+    const isLoggedIn = props.isLoggedIn;
+    if (isLoggedIn) {
+        return <NavbarVendor />
+    }
+    return <NavbarGuest />
+}
+
+export default Greeting;
