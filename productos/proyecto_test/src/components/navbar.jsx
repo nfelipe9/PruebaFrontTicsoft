@@ -1,5 +1,7 @@
 import React from 'react'
 
+import Containers from './container';
+
 import Navbar from 'react-bootstrap/Navbar';
 import Container from 'react-bootstrap/Container';
 
@@ -54,7 +56,12 @@ function NavbarGuest (props) {
 function Greeting(props) {
     const isLoggedIn = props.isLoggedIn;
     if (isLoggedIn) {
-        return <NavbarVendor />
+        return (
+            <>
+        <NavbarVendor/> 
+        <Containers/>
+            </>
+        )
     }
     return <NavbarGuest />
 }
