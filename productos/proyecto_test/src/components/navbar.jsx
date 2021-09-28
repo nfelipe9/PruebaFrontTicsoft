@@ -5,7 +5,7 @@ import Containers from './container';
 import Navbar from 'react-bootstrap/Navbar';
 import Container from 'react-bootstrap/Container';
 
-function NavbarAdmin (props) {
+function NavbarAdmin () {
     return (
         <Navbar bg="dark" variant="dark">
         <Container>
@@ -21,7 +21,7 @@ function NavbarAdmin (props) {
     )
 }
 
-function NavbarVendor (props) {
+function NavbarVendor () {
     return (
         <Navbar bg="dark" variant="dark">
         <Container>
@@ -37,7 +37,7 @@ function NavbarVendor (props) {
     )
 }
 
-function NavbarGuest (props) {
+function NavbarGuest () {
     return (
         <Navbar bg="dark" variant="dark">
         <Container>
@@ -63,7 +63,11 @@ function Greeting(props) {
             </>
         )
     }
-    return <NavbarGuest />
+    return (
+    <>
+    <NavbarGuest />
+    </>
+    )
 }
 
 export default Greeting;
