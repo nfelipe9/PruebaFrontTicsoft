@@ -1,22 +1,32 @@
-/*Definicion de parametro de tamaño de objetocs*/
-
-.all_size {
-    font-size: 1em;
-}
-
-
 /*Configuracion del fondo de la pagina html*/
 
 .back {
-    width: 100%;
-    height: 100%;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
+    background-image: url(/Images/Login_Fondo_logo22.png);
+    -webkit-background-size: 100% 100%;
+    -moz-background-size: 100% 100%;
+    -o-background-size: 100% 100%;
+    background-size: 100% 100%;
     background-repeat: no-repeat;
     background-position: center center;
     z-index: -10;
+}
+
+
+/*Contenedor para aplicar un modelo resposive que ajuste los elementos*/
+
+.sort {
+    width: 100%;
+    display: inline-flex;
+}
+
+
+/*Estilo para ajustar el logo a la pantalla*/
+
+.logo {
+    width: 30%;
+    height: 20%;
+    margin-top: 2%;
+    margin-left: 5%;
 }
 
 
@@ -24,10 +34,10 @@
 
 .container {
     text-align: center;
-    width: 28em;
-    height: 30em;
-    margin-right: 10em;
-    margin-top: -36.5em;
+    width: 350px;
+    height: fit-content;
+    margin-right: 10%;
+    margin-top: 5%;
     padding: 1%;
     border-style: outset;
     border-radius: 15px;
@@ -45,7 +55,7 @@
     position: relative;
     text-align: center;
     width: 100%;
-    height: 45%;
+    height: 35%;
     padding-bottom: 15px;
     margin: 3px;
 }
@@ -151,7 +161,7 @@ codigo fuente de internet url:https://www.w3schools.com/css/css3_buttons.asp*/
     width: 200px;
     margin: 10px;
     margin-top: -5px;
-    padding: 10px;
+    padding: 3px;
     border: none;
     border-radius: 20px;
     background-color: rgb(55, 166, 147);
@@ -162,7 +172,9 @@ codigo fuente de internet url:https://www.w3schools.com/css/css3_buttons.asp*/
 
 .log_button:hover {
     color: rgb(255, 255, 255);
-    transition: 30ms;
+    transition: 400ms;
+    background-color: rgb(46, 230, 200, 0.4);
+    box-shadow: 0 0 15px 3px rgb(30, 250, 210);
 }
 
 .log_button span {
@@ -193,6 +205,7 @@ codigo fuente de internet url:https://www.w3schools.com/css/css3_buttons.asp*/
 .log_button:focus {
     color: rgb(255, 255, 255);
     transition: 30ms;
+    outline: none;
 }
 
 .log_button:focus span {
@@ -202,6 +215,29 @@ codigo fuente de internet url:https://www.w3schools.com/css/css3_buttons.asp*/
 .log_button:focus span:after {
     opacity: 1;
     right: 20;
+}
+
+.linea {
+    margin: 0% 5%;
+    width: 38%;
+    border-top: 1px solid #999;
+    position: relative;
+    bottom: 10%;
+    float: left;
+}
+
+
+/*Nombre de la clase (interna) para poder modificarla (se encuentra con F12 en Elements
+selecciondo el div respectivo con id "my-signin2"*/
+
+.abcRioButton.abcRioButtonBlue {
+    background-color: rgb(55, 166, 147);
+}
+
+.abcRioButton.abcRioButtonBlue:hover {
+    background-color: rgb(46, 230, 200, 0.4);
+    box-shadow: 0 0 15px 3px rgb(30, 250, 210);
+    transition: 400ms;
 }
 
 
