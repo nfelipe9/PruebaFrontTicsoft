@@ -151,7 +151,7 @@ function Greeting(props) {
     return (
     <>
     <NavbarAdmin />
-    <Registrar/>
+    <ContainerAdmin/>
     </>
     )
 }
