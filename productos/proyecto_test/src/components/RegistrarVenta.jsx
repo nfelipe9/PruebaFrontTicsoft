@@ -5,55 +5,74 @@ import './Css.css'
 import Form from "react-bootstrap/Form";
 import Container from 'react-bootstrap/esm/Container';
 import Button from 'react-bootstrap/Button';
-import InputGroup from 'react-bootstrap/InputGroup';
 import Col from 'react-bootstrap/Col';
 import Toast from 'react-bootstrap/Toast';
 import Row from 'react-bootstrap/Row';
 
-function Registrar() {
+function RegistrarVenta() {
 
     const [show, setShow] = useState(false);
 
     return (
         <Container className="test">
             <Form>
+                    <Row>
+                        <Col>
+                        <Form.Label>Id Producto</Form.Label>
+                        <Form.Select size="m">
+                            <option>11122</option>
+                            <option>22233</option>
+                            <option>33344</option>
+                        </Form.Select>
+                        </Col>
+                        <Col>
+                            <Form.Group className="mb-3" controlId="formGroupValor">
+                                <Form.Label>Valor Unitario</Form.Label>
+                                <Form.Control type="text" placeholder="Valor Unitario" disabled/>
+                            </Form.Group>
+                        </Col>
+                    </Row>
                 <Form.Group className="mb-3" controlId="formGroupNombre">
-                    <Form.Label>Nombre</Form.Label>
-                    <Form.Control type="text" placeholder="Valor Venta" />
+                    <Form.Label>Nombre Producto</Form.Label>
+                    <Form.Control type="text" placeholder="Nombre" disabled/>
                 </Form.Group>
-                <Form.Group className="mb-3" controlId="formGroupPassword">
-                    <Form.Label>Descripcion</Form.Label>
-                    <Form.Control type="text" placeholder="Descripcion" />
+                <Form.Group className="mb-3" controlId="formGroupDescripcion">
+                    <Form.Label>Descripcion Producto</Form.Label>
+                    <Form.Control placeholder="Descripcion" disabled />
                 </Form.Group>
-                <Form.Group className="mb-3" controlId="formGroupPassword">
-                    <Form.Label>Cantidad</Form.Label>
-                    <Form.Control type="text" placeholder="Cantidad" />
+
+                <Form.Group>
+                <Form.Label>Cantidad</Form.Label>
+                        <Form.Select size="m">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                        </Form.Select>
                 </Form.Group>
-                <Form.Group className="mb-3" controlId="formGroupPassword">
-                    <Form.Label>Valor Unitario</Form.Label>
-                    <Form.Control type="text" placeholder="Valor Unitario" />
+
+                <Form.Group className="mb-3" controlId="formGroupIdCliente">
+                    <Form.Label>Id Cliente</Form.Label>
+                    <Form.Control placeholder="Descripcion" />
                 </Form.Group>
-                <Form.Group className="mb-3" controlId="formGroupPassword">
-                    <Form.Label>Valor Unitario</Form.Label>
-                    <Form.Control type="text" placeholder="Valor Unitario" />
+                <Form.Group className="mb-3" controlId="formGroupNombreCliente">
+                    <Form.Label>Nombre Cliente</Form.Label>
+                    <Form.Control placeholder="Descripcion" />
                 </Form.Group>
-                <Form.Group className="mb-3" controlId="formGroupPassword">
-                    <Form.Label>Valor Unitario</Form.Label>
-                    <Form.Control type="text" placeholder="Valor Unitario" />
+                <Form.Group>
+                <Form.Label>Id Vendedor</Form.Label>
+                        <Form.Select size="m">
+                            <option>11122</option>
+                            <option>22233</option>
+                            <option>33344</option>
+                        </Form.Select>
                 </Form.Group>
-                <Form.Group className="mb-3" controlId="formGroupPassword">
-                    <Form.Label>Valor Unitario</Form.Label>
-                    <Form.Control type="text" placeholder="Valor Unitario" />
-                </Form.Group>
-                <Form.Group className="mb-3" controlId="formGroupPassword">
-                    <Form.Label>Valor Unitario</Form.Label>
-                    <Form.Control type="text" placeholder="Id Vendedor" />
-                </Form.Group>
+                <Form.Group>
                 <div className="d-grid gap-2">
                 <Button variant="outline-dark" size="lg" onClick={() => setShow(true)}>
                     Registrar
                 </Button>
                 </div>
+                </Form.Group>
             </Form>
 
             <Row>
@@ -63,7 +82,7 @@ function Registrar() {
                             <strong className="me-auto">Correcto</strong>
                             <small>Ahora</small>
                         </Toast.Header>
-                        <Toast.Body>Producto registrado con exito</Toast.Body>
+                        <Toast.Body>Venta registrada con exito</Toast.Body>
                     </Toast>
                 </Col>
             </Row>
@@ -71,4 +90,4 @@ function Registrar() {
     )
 }
 
-export default Registrar;
+export default RegistrarVenta;

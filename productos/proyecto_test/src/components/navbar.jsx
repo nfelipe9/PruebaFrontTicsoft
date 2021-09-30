@@ -3,6 +3,7 @@ import React from 'react'
 import './Css.css'
 
 import Registrar from './Registrar';
+import RegistrarVenta from './RegistrarVenta';
 
 import Navbar from 'react-bootstrap/Navbar';
 import Container from 'react-bootstrap/Container';
@@ -144,7 +145,7 @@ function Greeting(props) {
         return (
             <>
         <NavbarVendor/> 
-        <ContainerVendor/>
+        <RegistrarVenta/>
             </>
         )
     }
