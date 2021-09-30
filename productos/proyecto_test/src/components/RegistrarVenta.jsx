@@ -17,7 +17,7 @@ function Registrar() {
     return (
         <Container className="test">
             <Form>
-                <Form.Group className="mb-3" controlId="formGroupEmail">
+                <Form.Group className="mb-3" controlId="formGroupNombre">
                     <Form.Label>Nombre</Form.Label>
                     <Form.Control type="text" placeholder="Valor Venta" />
                 </Form.Group>

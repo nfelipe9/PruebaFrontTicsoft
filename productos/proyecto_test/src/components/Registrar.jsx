@@ -17,19 +17,19 @@ function Registrar() {
     return (
         <Container className="test">
             <Form>
-                <Form.Group className="mb-3" controlId="formGroupEmail">
+                <Form.Group className="mb-3" controlId="formGroupNombre">
                     <Form.Label>Nombre</Form.Label>
                     <Form.Control type="text" placeholder="Nombre" />
                 </Form.Group>
-                <Form.Group className="mb-3" controlId="formGroupPassword">
+                <Form.Group className="mb-3" controlId="formGroupDescripcion">
                     <Form.Label>Descripcion</Form.Label>
                     <Form.Control type="text" placeholder="Descripcion" />
                 </Form.Group>
-                <Form.Group className="mb-3" controlId="formGroupPassword">
+                <Form.Group className="mb-3" controlId="formGroupCantidad">
                     <Form.Label>Cantidad</Form.Label>
                     <Form.Control type="text" placeholder="Cantidad" />
                 </Form.Group>
-                <Form.Group className="mb-3" controlId="formGroupPassword">
+                <Form.Group className="mb-3" controlId="formGroupValor">
                     <Form.Label>Valor Unitario</Form.Label>
                     <Form.Control type="text" placeholder="Valor Unitario" />
                 </Form.Group>
