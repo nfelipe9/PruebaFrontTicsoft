@@ -8,8 +8,8 @@ import {
 } from "react-router-dom";
 
 import Greeting from './components/navbar';
-import Registrar from './components/Registrar';
 import Contador from './components/micomponente';
+import RegistrarProducto from './components/RegistrarProducto';
 import RegistrarVenta from './components/RegistrarVenta';
 
 class App extends Component {
@@ -19,7 +19,7 @@ class App extends Component {
       <Switch>
           <Route exact path="/" component={Greeting} />
           <Route exact path="/RegistrarVenta" component={RegistrarVenta} />
-          <Route exact path="/RegistrarProducto" component={Registrar} />
+          <Route exact path="/RegistrarProducto" component={RegistrarProducto} />
       </Switch>
       </Router>
     );

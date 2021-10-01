@@ -3,18 +3,38 @@ import React, {useState} from 'react'
 import './Css.css'
 
 import Form from "react-bootstrap/Form";
+import Navbar from 'react-bootstrap/Navbar';
 import Container from 'react-bootstrap/esm/Container';
 import Button from 'react-bootstrap/Button';
+import Card from "react-bootstrap/Card";
 import Col from 'react-bootstrap/Col';
 import Toast from 'react-bootstrap/Toast';
 import Row from 'react-bootstrap/Row';
+
+function NavbarVendor () {
+    return (
+        <Navbar bg="dark" variant="dark">
+        <Container>
+            <Navbar.Brand href="#home">Vendedor</Navbar.Brand>
+            <Navbar.Toggle />
+            <Navbar.Collapse className="justify-content-end">
+            <Navbar.Text>
+                Bienvenido: <a href="#login">@Username</a>
+            </Navbar.Text>
+            </Navbar.Collapse>
+        </Container>
+        </Navbar>
+    )
+}
 
 function RegistrarVenta() {
 
     const [show, setShow] = useState(false);
 
     return (
+
         <Container className="test">
+
             <Form>
                     <Row>
                         <Col>
@@ -31,11 +51,14 @@ function RegistrarVenta() {
                                 <Form.Control type="text" placeholder="Valor Unitario" disabled/>
                             </Form.Group>
                         </Col>
+                        <Col>
+                            <Form.Group className="mb-3" controlId="formGroupNombre">
+                                <Form.Label>Nombre Producto</Form.Label>
+                                <Form.Control type="text" placeholder="Nombre" disabled />
+                            </Form.Group>
+                        </Col>
                     </Row>
-                <Form.Group className="mb-3" controlId="formGroupNombre">
-                    <Form.Label>Nombre Producto</Form.Label>
-                    <Form.Control type="text" placeholder="Nombre" disabled/>
-                </Form.Group>
+                
                 <Form.Group className="mb-3" controlId="formGroupDescripcion">
                     <Form.Label>Descripcion Producto</Form.Label>
                     <Form.Control placeholder="Descripcion" disabled />
@@ -52,11 +75,11 @@ function RegistrarVenta() {
 
                 <Form.Group className="mb-3" controlId="formGroupIdCliente">
                     <Form.Label>Id Cliente</Form.Label>
-                    <Form.Control placeholder="Descripcion" />
+                    <Form.Control placeholder="Id CLiente" />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formGroupNombreCliente">
                     <Form.Label>Nombre Cliente</Form.Label>
-                    <Form.Control placeholder="Descripcion" />
+                    <Form.Control placeholder="Nombre Cliente" />
                 </Form.Group>
                 <Form.Group>
                 <Form.Label>Id Vendedor</Form.Label>
@@ -69,13 +92,12 @@ function RegistrarVenta() {
                 <Form.Group>
                 <div className="d-grid gap-2">
                 <Button variant="outline-dark" size="lg" onClick={() => setShow(true)}>
-                    Registrar
+                    Registrar Venta
                 </Button>
                 </div>
                 </Form.Group>
             </Form>
 
-            <Row>
                 <Col xs={4} className="toastTst">
                     <Toast onClose={() => setShow(false)} show={show} delay={3000} autohide>
                         <Toast.Header>
@@ -85,9 +107,17 @@ function RegistrarVenta() {
                         <Toast.Body>Venta registrada con exito</Toast.Body>
                     </Toast>
                 </Col>
-            </Row>
         </Container>
     )
 }
 
-export default RegistrarVenta;
+function Greeting() {
+        return (
+            <>
+        <NavbarVendor/> 
+        <RegistrarVenta/>
+            </>
+        )
+}
+
+export default Greeting;
