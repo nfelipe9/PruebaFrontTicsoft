@@ -6,7 +6,6 @@ import Form from "react-bootstrap/Form";
 import Navbar from 'react-bootstrap/Navbar';
 import Container from 'react-bootstrap/esm/Container';
 import Button from 'react-bootstrap/Button';
-import Card from "react-bootstrap/Card";
 import Col from 'react-bootstrap/Col';
 import Toast from 'react-bootstrap/Toast';
 import Row from 'react-bootstrap/Row';

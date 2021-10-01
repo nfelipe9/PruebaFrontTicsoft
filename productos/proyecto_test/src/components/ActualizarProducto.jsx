@@ -26,7 +26,7 @@ function NavbarVendor () {
     )
 }
 
-function RegistrarVenta() {
+function ActualizarProducto() {
 
     const [show, setShow] = useState(false);
 
@@ -34,7 +34,7 @@ function RegistrarVenta() {
 
         <Container className="test">
 
-            <Form>
+                <Form>
                     <Row>
                         <Col>
                         <Form.Label>Id Producto</Form.Label>
@@ -47,55 +47,44 @@ function RegistrarVenta() {
                         <Col>
                             <Form.Group className="mb-3" controlId="formGroupValor">
                                 <Form.Label>Valor Unitario</Form.Label>
-                                <Form.Control type="text" placeholder="Valor Unitario" disabled/>
+                                <Form.Control type="text" placeholder="Valor Unitario"/>
                             </Form.Group>
                         </Col>
                         <Col>
                             <Form.Group className="mb-3" controlId="formGroupNombre">
                                 <Form.Label>Nombre Producto</Form.Label>
-                                <Form.Control type="text" placeholder="Nombre" disabled />
+                                <Form.Control type="text" placeholder="Nombre"/>
                             </Form.Group>
                         </Col>
                     </Row>
-                
-                <Form.Group className="mb-3" controlId="formGroupDescripcion">
-                    <Form.Label>Descripcion Producto</Form.Label>
-                    <Form.Control placeholder="Descripcion" disabled />
-                </Form.Group>
+                </Form>
 
-                <Form.Group>
-                <Form.Label>Cantidad</Form.Label>
-                        <Form.Select size="m">
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                        </Form.Select>
-                </Form.Group>
+                <Form>
+                    <Row>
+                        <Col>
+                            <Form.Group className="mb-3" controlId="formGroupValor">
+                                <Form.Label>Descripcion</Form.Label>
+                                <Form.Control type="text" placeholder="Descripcion" />
+                            </Form.Group>
+                        </Col>
+                        <Col>
+                            <Form.Group className="mb-3" controlId="formGroupValor">
+                                <Form.Label>Cantidad</Form.Label>
+                                <Form.Control type="text" placeholder="Cantidad"/>
+                            </Form.Group>
+                        </Col>
+                    </Row>
+                </Form>
 
-                <Form.Group className="mb-3" controlId="formGroupIdCliente">
-                    <Form.Label>Id Cliente</Form.Label>
-                    <Form.Control placeholder="Id CLiente" />
-                </Form.Group>
-                <Form.Group className="mb-3" controlId="formGroupNombreCliente">
-                    <Form.Label>Nombre Cliente</Form.Label>
-                    <Form.Control placeholder="Nombre Cliente" />
-                </Form.Group>
-                <Form.Group>
-                <Form.Label>Id Vendedor</Form.Label>
-                        <Form.Select size="m">
-                            <option>11122</option>
-                            <option>22233</option>
-                            <option>33344</option>
-                        </Form.Select>
-                </Form.Group>
-                <Form.Group>
-                <div className="d-grid gap-2">
-                <Button variant="outline-dark" size="lg" onClick={() => setShow(true)}>
-                    Registrar Venta
-                </Button>
-                </div>
-                </Form.Group>
-            </Form>
+                <Form>
+                    <Row>
+                        <Col>
+                        <Button variant="outline-dark" size="lg" onClick={() => setShow(true)}>
+                            Actualizar Producto
+                        </Button>
+                        </Col>
+                    </Row>
+                </Form>
 
                 <Col xs={4} className="toastTst">
                     <Toast onClose={() => setShow(false)} show={show} delay={3000} autohide>
@@ -103,7 +92,7 @@ function RegistrarVenta() {
                             <strong className="me-auto">Correcto</strong>
                             <small>Ahora</small>
                         </Toast.Header>
-                        <Toast.Body>Venta registrada con exito</Toast.Body>
+                        <Toast.Body>Producto actualizado con exito</Toast.Body>
                     </Toast>
                 </Col>
         </Container>
@@ -114,7 +103,7 @@ function Greeting() {
         return (
             <>
         <NavbarVendor/> 
-        <RegistrarVenta/>
+        <ActualizarProducto/>
             </>
         )
 }
