@@ -9,12 +9,14 @@ import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Toast from 'react-bootstrap/Toast';
 import Row from 'react-bootstrap/Row';
+import Table from 'react-bootstrap/Table';
 
-function NavbarVendor () {
+
+function NavbarAdmin () {
     return (
         <Navbar bg="dark" variant="dark">
         <Container>
-            <Navbar.Brand href="#home">Vendedor</Navbar.Brand>
+            <Navbar.Brand href="#home">Administrador</Navbar.Brand>
             <Navbar.Toggle />
             <Navbar.Collapse className="justify-content-end">
             <Navbar.Text>
@@ -32,28 +34,29 @@ function ActualizarProducto() {
 
     return (
 
-        <Container className="test">
+        <Container>
+            <Row>
 
                 <Form>
                     <Row>
                         <Col>
-                        <Form.Label>Id Producto</Form.Label>
-                        <Form.Select size="m">
-                            <option>11122</option>
-                            <option>22233</option>
-                            <option>33344</option>
-                        </Form.Select>
+                            <Form.Label>Id Producto</Form.Label>
+                            <Form.Select size="m">
+                                <option>001</option>
+                                <option>002</option>
+                                <option>003</option>
+                            </Form.Select>
                         </Col>
                         <Col>
                             <Form.Group className="mb-3" controlId="formGroupValor">
                                 <Form.Label>Valor Unitario</Form.Label>
-                                <Form.Control type="text" placeholder="Valor Unitario"/>
+                                <Form.Control type="text" placeholder="Valor Unitario" />
                             </Form.Group>
                         </Col>
                         <Col>
                             <Form.Group className="mb-3" controlId="formGroupNombre">
                                 <Form.Label>Nombre Producto</Form.Label>
-                                <Form.Control type="text" placeholder="Nombre"/>
+                                <Form.Control type="text" placeholder="Nombre" />
                             </Form.Group>
                         </Col>
                     </Row>
@@ -70,7 +73,7 @@ function ActualizarProducto() {
                         <Col>
                             <Form.Group className="mb-3" controlId="formGroupValor">
                                 <Form.Label>Cantidad</Form.Label>
-                                <Form.Control type="text" placeholder="Cantidad"/>
+                                <Form.Control type="text" placeholder="Cantidad" />
                             </Form.Group>
                         </Col>
                     </Row>
@@ -79,30 +82,74 @@ function ActualizarProducto() {
                 <Form>
                     <Row>
                         <Col>
-                        <Button variant="outline-dark" size="lg" onClick={() => setShow(true)}>
-                            Actualizar Producto
-                        </Button>
+                            <Button variant="outline-dark" size="lg" onClick={() => setShow(true)}>
+                                Actualizar Producto
+                            </Button>
                         </Col>
                     </Row>
                 </Form>
+            </Row>
 
-                <Col xs={4} className="toastTst">
-                    <Toast onClose={() => setShow(false)} show={show} delay={3000} autohide>
-                        <Toast.Header>
-                            <strong className="me-auto">Correcto</strong>
-                            <small>Ahora</small>
-                        </Toast.Header>
-                        <Toast.Body>Producto actualizado con exito</Toast.Body>
-                    </Toast>
-                </Col>
+            <Col xs={4} className="toastTst">
+                <Toast onClose={() => setShow(false)} show={show} delay={3000} autohide>
+                    <Toast.Header>
+                        <strong className="me-auto">Correcto</strong>
+                        <small>Ahora</small>
+                    </Toast.Header>
+                    <Toast.Body>Producto actualizado con exito</Toast.Body>
+                </Toast>
+            </Col>
+
+            <Row>
+                <Table striped bordered hover variant="dark">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Id Producto</th>
+                            <th>Nombre</th>
+                            <th>Valor</th>
+                            <th>Descripcion</th>
+                            <th>Cantidad</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>001</td>
+                            <td>Telefono</td>
+                            <td>2000</td>
+                            <td>Et harum quidem rerum facilis est et expedita distinctio</td>
+                            <td>20</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>002</td>
+                            <td>Computadora</td>
+                            <td>3000</td>
+                            <td>Et harum quidem rerum facilis est et expedita distinctio</td>
+                            <td>30</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>003</td>
+                            <td>Televisor</td>
+                            <td>5000</td>
+                            <td>Et harum quidem rerum facilis est et expedita distinctio</td>
+                            <td>45</td>
+                        </tr>
+                    </tbody>
+                </Table>
+            </Row>
         </Container>
+
+        
     )
 }
 
 function Greeting() {
         return (
             <>
-        <NavbarVendor/> 
+        <NavbarAdmin/> 
         <ActualizarProducto/>
             </>
         )

@@ -9,12 +9,14 @@ import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Toast from 'react-bootstrap/Toast';
 import Row from 'react-bootstrap/Row';
+import Table from 'react-bootstrap/Table';
 
-function NavbarAdmin () {
+
+function NavbarVendor () {
     return (
         <Navbar bg="dark" variant="dark">
         <Container>
-            <Navbar.Brand href="#home">Administrador</Navbar.Brand>
+            <Navbar.Brand href="#home">Vendedor</Navbar.Brand>
             <Navbar.Toggle />
             <Navbar.Collapse className="justify-content-end">
             <Navbar.Text>
@@ -26,14 +28,14 @@ function NavbarAdmin () {
     )
 }
 
-function ActualizarProducto() {
+function ActualizarVenta() {
 
     const [show, setShow] = useState(false);
 
     return (
 
-        <Container className="test">
-
+        <Container>
+            <Row>
                 <Form>
                     <Row>
                         <Col>
@@ -47,9 +49,9 @@ function ActualizarProducto() {
                         <Col>
                         <Form.Label>Id Producto</Form.Label>
                         <Form.Select size="m">
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
+                            <option>001</option>
+                            <option>002</option>
+                            <option>003</option>
                         </Form.Select>
                         </Col>
                         <Col>
@@ -71,8 +73,8 @@ function ActualizarProducto() {
                         </Col>
                         <Col>
                             <Form.Group className="mb-3" controlId="formGroupProducto">
-                                <Form.Label>Nombre Producto</Form.Label>
-                                <Form.Control type="text" placeholder="Nombre Producto" disabled/>
+                                <Form.Label>Nombre Cliente</Form.Label>
+                                <Form.Control type="text" placeholder="Nombre Cliente" disabled/>
                             </Form.Group>
                         </Col>
                         <Col>
@@ -108,7 +110,6 @@ function ActualizarProducto() {
                         </Col>
                     </Row>
                 </Form>
-
                 <Form>
                     <Row>
                         <Col>
@@ -118,6 +119,7 @@ function ActualizarProducto() {
                         </Col>
                     </Row>
                 </Form>
+            </Row>    
 
                 <Col xs={4} className="toastTst">
                     <Toast onClose={() => setShow(false)} show={show} delay={3000} autohide>
@@ -128,6 +130,61 @@ function ActualizarProducto() {
                         <Toast.Body>Venta actualizada con exito</Toast.Body>
                     </Toast>
                 </Col>
+
+            <Row>
+                <Table striped bordered hover variant="dark">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Id Venta</th>
+                            <th>Id Producto</th>
+                            <th>Nombre Producto</th>
+                            <th>Id Cliente</th>
+                            <th>Nombre Cliente</th>
+                            <th>Cantidad</th>
+                            <th>Fecha de Compra</th>
+                            <th>Estado de Venta</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>11122</td>
+                            <td>001</td>
+                            <td>Telefono</td>
+                            <td>121</td>
+                            <td>Pepe</td>
+                            <td>2</td>
+                            <td>1/10/21</td>
+                            <td>En proceso</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>22233</td>
+                            <td>002</td>
+                            <td>Computadora</td>
+                            <td>121</td>
+                            <td>Robert</td>
+                            <td>3</td>
+                            <td>1/10/21</td>
+                            <td>En proceso</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>33344</td>
+                            <td>003</td>
+                            <td>Television</td>
+                            <td>121</td>
+                            <td>Marco</td>
+                            <td>2</td>
+                            <td>1/10/21</td>
+                            <td>En proceso</td>
+                        </tr>
+                    </tbody>
+                </Table>
+
+
+            </Row>    
         </Container>
     )
 }
@@ -135,8 +192,8 @@ function ActualizarProducto() {
 function Greeting() {
         return (
             <>
-        <NavbarAdmin/> 
-        <ActualizarProducto/>
+        <NavbarVendor/> 
+        <ActualizarVenta/>
             </>
         )
 }
