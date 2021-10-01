@@ -14,6 +14,7 @@ import LoginAdmin from './components/LoginAdmin';
 import ActualizarProducto from './components/ActualizarProducto';
 import ActualizarVenta from './components/ActualizarVenta';
 import PageNotFound from './components/PageNotFound';
+import MasterAdmin from './components/MasterAdmin';
 
 class App extends Component {
   render() {
@@ -24,8 +25,9 @@ class App extends Component {
           <Route exact path="/" component={LoginAdmin} />
           <Route exact path="/RegistrarVenta" component={RegistrarVenta} />
           <Route exact path="/RegistrarProducto" component={RegistrarProducto} />
-          <Route exact path={"/ActualizarProducto"} component={ActualizarProducto} />
-          <Route exact path={"/ActualizarVenta"} component={ActualizarVenta} />
+          <Route exact path="/ActualizarProducto" component={ActualizarProducto} />
+          <Route exact path="/ActualizarVenta" component={ActualizarVenta} />
+          <Route exact path="/Admin" component={MasterAdmin} />
           <Route component={PageNotFound} />
       </Switch>
       </Router>

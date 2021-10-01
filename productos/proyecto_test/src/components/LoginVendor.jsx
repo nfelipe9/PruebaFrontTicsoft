@@ -11,8 +11,6 @@ import Row from "react-bootstrap/Row";
 
 import {
     BrowserRouter as Router,
-    Switch,
-    Route,
     Link
   } from "react-router-dom";
 
