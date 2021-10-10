@@ -1,0 +1,260 @@
+/*Configuracion del fondo de la pagina html*/
+
+.back {
+    size: 100%;
+    background-image: url("../../assets/LoginImagen/Login_Fondo_logo.png");
+    -webkit-background-size: 100% 100%;
+    -moz-background-size: 100% 100%;
+    -o-background-size: 100% 100%;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center center;
+    z-index: -9px;
+    position: absolute;
+}
+
+
+/*Contenedor para aplicar un modelo resposive que ajuste los elementos*/
+
+.sort {
+    height: fit-content;
+    display: inline-flex;
+}
+
+
+/*Estilo para ajustar el logo a la pantalla*/
+
+.logo {
+    width: 30%;
+    height: 20%;
+    margin-top: 2%;
+    margin-left: 5%;
+}
+
+
+/*Diseño del contenedor para botones y lista desplegable */
+
+.boxContainer {
+    text-align: center;
+    margin-right: 2%;
+    margin-top: 0%;
+    padding: 1%;
+    border-style: outset;
+    border-radius: 15px;
+    border-color: rgb(156, 146, 146);
+    background-color: transparent;
+    box-shadow: 0px 0px 25px 10px rgb(55, 166, 147);
+    z-index: 2px;
+}
+
+
+/* Ajuste de la imagen de usuario grande*/
+
+.img_user {
+    position: relative;
+    text-align: center;
+    width: 100%;
+    height: 35%;
+    padding-bottom: 15px;
+    margin: 3px;
+}
+
+
+/* Modificacion de la clase de W3 (online) para ajustar colores
+box-shadow: 0px 0px 8px 0px rgb(55, 166, 147) !important; */
+
+input.form-control:focus {
+    box-shadow: 0px 0px 8px 0px rgb(55, 166, 147);
+    color: black;
+}
+
+
+/* Configuracion para ajustar los campos de login en linea y no debajo del span*/
+
+.in_line {
+    width: 100%;
+    display: inline-flex;
+    padding: 8px;
+}
+
+
+/* Modificacion del tamaño de los iconos de login*/
+
+.icon {
+    width: 80%;
+    height: 80%;
+    object-fit: contain;
+    padding: 0%;
+}
+
+
+/* Modifica la posicion y aspecto de los icon al lado de los campos de login*/
+
+span.input-group-text {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    padding: 0%;
+    background-color: black;
+    width: 40px;
+    height: 40px;
+    border-color: white;
+}
+
+
+/*Diseño para lista desplegable (olvide colocar link de la fuente)*/
+
+.selector {
+    display: inline-block;
+    font-size: 16px;
+    font-family: 'Arial', sans-serif;
+    font-weight: 400;
+    color: rgb(54, 54, 54);
+    line-height: 1.3;
+    padding: .4em 1.4em .3em .8em;
+    width: 200px;
+    max-width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 5px;
+    border: 2px solid rgb(61, 60, 60);
+    box-shadow: 0 1px 0 1px rgba(0, 0, 0, .03);
+    border-radius: .3em;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+    background-color: #fff;
+    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23007CB2%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E'), linear-gradient(to bottom, #ffffff 0%, #f7f7f7 100%);
+    background-repeat: no-repeat, repeat;
+    background-position: right .7em top 50%, 0 0;
+    background-size: .65em auto, 100%;
+}
+
+.select-css::-ms-expand {
+    display: none;
+}
+
+.select-css:hover {
+    border-color: #888;
+}
+
+.select-css:focus {
+    border-color: #aaa;
+    box-shadow: 0 0 1px 3px rgba(59, 153, 252, .7);
+    box-shadow: 0 0 0 3px -moz-mac-focusring;
+    color: #222;
+    outline: none;
+}
+
+.select-css option {
+    font-weight: normal;
+}
+
+
+/* Diseño de estilo para el boton "Ingresar"
+codigo fuente de internet url:https://www.w3schools.com/css/css3_buttons.asp*/
+
+.log_button {
+    display: inline-block;
+    text-align: center;
+    font-size: 25px;
+    width: 200px;
+    margin: 10px;
+    margin-top: -5px;
+    padding: 3px;
+    border: none;
+    border-radius: 20px;
+    background-color: rgb(55, 166, 147);
+    color: white;
+    transition: all 0.2s;
+    cursor: pointer;
+}
+
+.log_button:hover {
+    color: rgb(255, 255, 255);
+    transition: 400ms;
+    background-color: rgb(46, 230, 200, 0.4);
+    box-shadow: 0 0 15px 3px rgb(30, 250, 210);
+}
+
+.log_button span {
+    cursor: pointer;
+    display: block;
+    position: relative;
+    transition: 0.5s;
+}
+
+.log_button span:after {
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: 25px;
+    transition: 0.5s;
+}
+
+.log_button:hover span {
+    padding-right: 25px;
+}
+
+.log_button:hover span:after {
+    opacity: 1;
+    right: -20;
+}
+
+.log_button:focus {
+    color: rgb(255, 255, 255);
+    transition: 30ms;
+    outline: none;
+}
+
+.log_button:focus span {
+    padding-right: 25px;
+}
+
+.log_button:focus span:after {
+    opacity: 1;
+    right: 20;
+}
+
+.linea {
+    margin: 0% 5%;
+    width: 38%;
+    border-top: 1px solid #999;
+    position: relative;
+    bottom: 10%;
+    float: left;
+}
+
+
+/*Nombre de la clase (interna) para poder modificarla (se encuentra con F12 en Elements
+selecciondo el div respectivo con id "my-signin2"*/
+
+.abcRioButton.abcRioButtonBlue {
+    background-color: rgb(55, 166, 147);
+}
+
+.abcRioButton.abcRioButtonBlue:hover {
+    background-color: rgb(46, 230, 200, 0.4);
+    box-shadow: 0 0 15px 3px rgb(30, 250, 210);
+    transition: 400ms;
+}
+
+button.google {
+    background-color: rgb(55, 166, 147) !important;
+}
+
+button.google:hover {
+    background-color: rgb(46, 230, 200, 0.4) !important;
+    box-shadow: 0 0 15px 3px rgb(30, 250, 210) !important;
+    transition: 400ms;
+}
+
+
+/*Estilo para el footer*/
+
+.foot {
+    text-align: center;
+    font-family: Helvetica;
+    color: #fff;
+    text-shadow: 0 0 7px #fff, 0 0 10px #fff, 0 0 21px #fff, 0 0 42px #0fa, 0 0 82px #0fa, 0 0 92px #0fa, 0 0 102px #0fa, 0 0 151px #0fa;
+}
