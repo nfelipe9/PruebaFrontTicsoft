@@ -1,35 +1,213 @@
-import React, {useState} from 'react'
+import React, { useState, Component } from 'react';
+import TecsoftDataService from "../services/tecsoft.service";
 
-import './Css.css'
+import './Css.css';
 
-import Form from "react-bootstrap/Form";
-import Navbar from 'react-bootstrap/Navbar';
-import Container from 'react-bootstrap/esm/Container';
-import Button from 'react-bootstrap/Button';
-import Col from 'react-bootstrap/Col';
-import Toast from 'react-bootstrap/Toast';
-import Row from 'react-bootstrap/Row';
+import { Link } from "react-router-dom";
+
 import Table from 'react-bootstrap/Table';
+import Container from 'react-bootstrap/esm/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Form from "react-bootstrap/Form";
+import Button from 'react-bootstrap/Button';
+
+export default class ActualizarProducto extends Component {
+    constructor(props) {
+        super(props);
+        this.onChangeSearchNombre = this.onChangeSearchNombre.bind(this);
+        this.retrieveProductos = this.retrieveProductos.bind(this);
+        this.refreshList = this.refreshList.bind(this);
+        this.setActiveProductos = this.setActiveProductos.bind(this);
+        this.searchNombre = this.searchNombre.bind(this);
 
 
-function NavbarAdmin () {
-    return (
-        <Navbar bg="dark" variant="dark">
-        <Container>
-            <Navbar.Brand href="#home">Administrador</Navbar.Brand>
-            <Navbar.Toggle />
-            <Navbar.Collapse className="justify-content-end">
-            <Navbar.Text>
-                Bienvenido: <a href="#login">@Username</a>
-            </Navbar.Text>
-            </Navbar.Collapse>
-        </Container>
-        </Navbar>
-    )
+        this.state = {
+            productos: [],
+            currentProducto: null,
+            currentIndex: -1,
+            searchNombre: ""
+        };
+    }
+
+    componentDidMount() {
+        this.retrieveProductos();
+    }
+
+    onChangeSearchNombre(e) {
+        const searchNombre = e.target.value;
+
+        this.setState({
+            searchNombre: searchNombre
+        });
+    }
+
+    retrieveProductos() {
+        TecsoftDataService.getAll()
+            .then(response => {
+                this.setState({
+                    productos: response.data
+                });
+                console.log(response.data);
+            })
+            .catch(e => {
+                console.log(e);
+            });
+    }
+
+    refreshList() {
+        this.retrieveProducto();
+        this.setState({
+            currentProducto: null,
+            currentIndex: -1
+        });
+    }
+
+    setActiveProductos(producto, index) {
+        this.setState({
+            currentProducto: producto,
+            currentIndex: index
+        });
+    }
+
+    searchNombre() {
+        TecsoftDataService.findByNombre(this.state.searchNombre)
+            .then(response => {
+                this.setState({
+                    productos: response.data
+                });
+                console.log(response.data);
+            })
+            .catch(e => {
+                console.log(e);
+            });
+    }
+
+
+    render() {
+
+        const { searchNombre, productos, currentProducto, currentIndex } = this.state;
+
+        return (
+
+            <div className="listItems">
+                <Container>
+
+                    <Row>
+                        {currentProducto ? (
+                            <div>
+                                <div>
+                                    <Form>
+                                        <Row>
+                                            <Col>
+                                                <Form.Group className="mb-3" controlId="formGroupValor">
+                                                    <Form.Label>Id Producto</Form.Label>
+                                                    <Form.Control type="text" placeholder={currentProducto.id} disabled />
+                                                </Form.Group>
+                                            </Col>
+                                            <Col>
+                                                <Form.Group className="mb-3" controlId="formGroupNombre">
+                                                    <Form.Label>Nombre Producto</Form.Label>
+                                                    <Form.Control type="text" placeholder={currentProducto.nombre} />
+                                                </Form.Group>
+                                            </Col>
+                                            <Col>
+                                                <Form.Group className="mb-3" controlId="formGroupNombre">
+                                                    <Form.Label>Descripcion Producto</Form.Label>
+                                                    <Form.Control type="text" placeholder={currentProducto.descripcion} />
+                                                </Form.Group>
+                                            </Col>
+                                        </Row>
+                                    </Form>
+                                    <Form>
+                                        <Row>
+                                            <Col>
+                                                <Form.Group className="mb-3" controlId="formGroupValor">
+                                                    <Form.Label>Valor Unitario</Form.Label>
+                                                    <Form.Control type="text" placeholder={currentProducto.valor} />
+                                                </Form.Group>
+                                            </Col>
+                                            <Col>
+                                                <Form.Group className="mb-3" controlId="formGroupValor">
+                                                    <Form.Label>Cantidad</Form.Label>
+                                                    <Form.Control type="text" placeholder={currentProducto.cantidad} />
+                                                </Form.Group>
+                                            </Col>
+                                        </Row>
+                                    </Form>
+
+                                    <Form>
+                                        <Row>
+                                            <Col>
+                                            <Link to={"/tutorials/" + currentProducto.id}>
+                                                <Button variant="outline-dark" size="lg">
+                                                    Actualizar Producto
+                                                </Button>
+                                                </Link>
+                                            </Col>
+                                        </Row>
+                                    </Form>
+                                </div>
+
+                                <Link
+                                    to={"/tutorials/" + currentProducto.id}
+                                    className="badge badge-warning"
+                                >
+                                    Actualizar
+                                </Link>
+                            </div>
+                        ) : (
+                            <div>
+                                <br />
+                                <p>Selecciona un Producto</p>
+                            </div>
+                        )}
+
+
+                    </Row>
+
+                    <Row>
+                        <ul className="list-group">
+                            {productos && productos.map((producto, index) => (
+
+                                <li
+                                    className={"list-group-item " + (index === currentIndex ? "active" : "")}
+                                    onClick={() => this.setActiveProductos(producto, index)}
+                                    key={index}
+                                >
+                                    <Table striped bordered hover variant="dark">
+                                        <thead>
+                                            <tr>
+                                                <th>Id Producto</th>
+                                                <th>Nombre</th>
+                                                <th>Valor</th>
+                                                <th>Descripcion</th>
+                                                <th>Cantidad</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>{producto.id}</td>
+                                                <td>{producto.nombre}</td>
+                                                <td>{producto.valor}</td>
+                                                <td>{producto.descripcion}</td>
+                                                <td>{producto.cantidad}</td>
+                                            </tr>
+                                        </tbody>
+                                    </Table>
+                                </li>
+
+                            ))}
+                        </ul>
+                    </Row>
+                </Container>
+            </div>
+        );
+
+    }
 }
 
-function ActualizarProducto() {
-
+/*
     const [show, setShow] = useState(false);
 
     return (
@@ -142,17 +320,6 @@ function ActualizarProducto() {
             </Row>
         </Container>
 
-        
+
     )
-}
-
-function Greeting() {
-        return (
-            <>
-        <NavbarAdmin/> 
-        <ActualizarProducto/>
-            </>
-        )
-}
-
-export default Greeting;
+} */
