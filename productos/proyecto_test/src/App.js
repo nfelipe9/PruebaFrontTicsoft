@@ -7,7 +7,6 @@ import Container from 'react-bootstrap/esm/Container';
 import Nav from 'react-bootstrap/Nav';
 
 import {
-  BrowserRouter as Router,
   Route,
   Switch,
   Link

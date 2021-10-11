@@ -1,4 +1,4 @@
-import React, { useState, Component } from 'react';
+import React, { Component } from 'react';
 import TecsoftDataService from "../services/tecsoft.service";
 
 import './Css.css';
@@ -19,14 +19,16 @@ export default class ActualizarProducto extends Component {
         this.retrieveProductos = this.retrieveProductos.bind(this);
         this.refreshList = this.refreshList.bind(this);
         this.setActiveProductos = this.setActiveProductos.bind(this);
-        this.searchNombre = this.searchNombre.bind(this);
+        this.updateProductos = this.updateProductos.bind(this);
+        this.onChangeNombre = this.onChangeNombre.bind(this);
 
 
         this.state = {
             productos: [],
             currentProducto: null,
             currentIndex: -1,
-            searchNombre: ""
+            searchNombre: "",
+            nombre: ""
         };
     }
 
@@ -63,6 +65,28 @@ export default class ActualizarProducto extends Component {
         });
     }
 
+    updateProductos() {
+        TecsoftDataService.update(
+            this.state.currentProducto.id,
+            this.state.currentProducto
+        )
+            .then(response => {
+                console.log(response.data);
+                this.setState({
+                    message: "Producto updated successfully!"
+                });
+            })
+            .catch(e => {
+                console.log(e);
+            });
+    }
+
+    onChangeNombre(e) {
+        this.setState({
+            nombre: e.target.value
+        });
+    }
+
     setActiveProductos(producto, index) {
         this.setState({
             currentProducto: producto,
@@ -70,23 +94,11 @@ export default class ActualizarProducto extends Component {
         });
     }
 
-    searchNombre() {
-        TecsoftDataService.findByNombre(this.state.searchNombre)
-            .then(response => {
-                this.setState({
-                    productos: response.data
-                });
-                console.log(response.data);
-            })
-            .catch(e => {
-                console.log(e);
-            });
-    }
 
 
     render() {
 
-        const { searchNombre, productos, currentProducto, currentIndex } = this.state;
+        const { productos, currentProducto, currentIndex } = this.state;
 
         return (
 
@@ -96,65 +108,64 @@ export default class ActualizarProducto extends Component {
                     <Row>
                         {currentProducto ? (
                             <div>
-                                <div>
-                                    <Form>
-                                        <Row>
-                                            <Col>
-                                                <Form.Group className="mb-3" controlId="formGroupValor">
-                                                    <Form.Label>Id Producto</Form.Label>
-                                                    <Form.Control type="text" placeholder={currentProducto.id} disabled />
-                                                </Form.Group>
-                                            </Col>
-                                            <Col>
-                                                <Form.Group className="mb-3" controlId="formGroupNombre">
-                                                    <Form.Label>Nombre Producto</Form.Label>
-                                                    <Form.Control type="text" placeholder={currentProducto.nombre} />
-                                                </Form.Group>
-                                            </Col>
-                                            <Col>
-                                                <Form.Group className="mb-3" controlId="formGroupNombre">
-                                                    <Form.Label>Descripcion Producto</Form.Label>
-                                                    <Form.Control type="text" placeholder={currentProducto.descripcion} />
-                                                </Form.Group>
-                                            </Col>
-                                        </Row>
-                                    </Form>
-                                    <Form>
-                                        <Row>
-                                            <Col>
-                                                <Form.Group className="mb-3" controlId="formGroupValor">
-                                                    <Form.Label>Valor Unitario</Form.Label>
-                                                    <Form.Control type="text" placeholder={currentProducto.valor} />
-                                                </Form.Group>
-                                            </Col>
-                                            <Col>
-                                                <Form.Group className="mb-3" controlId="formGroupValor">
-                                                    <Form.Label>Cantidad</Form.Label>
-                                                    <Form.Control type="text" placeholder={currentProducto.cantidad} />
-                                                </Form.Group>
-                                            </Col>
-                                        </Row>
-                                    </Form>
+                                <Form>
+                                    <Row>
+                                        <Col>
+                                            <Form.Group className="mb-3" controlId="formGroupValor">
+                                                <Form.Label>Id Producto</Form.Label>
+                                                <Form.Control type="text" 
+                                                    placeholder={currentProducto.id} disabled />
+                                            </Form.Group>
+                                        </Col>
+                                        <Col>
+                                            <Form.Group className="mb-3" controlId="formGroupNombre">
+                                                <Form.Label>Nombre Producto</Form.Label>
+                                                <Form.Control type="text" 
+                                                        id="nombre"
+                                                        required
+                                                        value={this.state.nombre}
+                                                        onChange={this.onChangeNombre}
+                                                        placeholder={currentProducto.nombre} />
+                                            </Form.Group>
+                                        </Col>
+                                        <Col>
+                                            <Form.Group className="mb-3" controlId="formGroupNombre">
+                                                <Form.Label>Descripcion Producto</Form.Label>
+                                                <Form.Control type="text" placeholder={currentProducto.descripcion} />
+                                            </Form.Group>
+                                        </Col>
+                                    </Row>
+                                </Form>
+                                <Form>
+                                    <Row>
+                                        <Col>
+                                            <Form.Group className="mb-3" controlId="formGroupValor">
+                                                <Form.Label>Valor Unitario</Form.Label>
+                                                <Form.Control type="text" placeholder={currentProducto.valor} />
+                                            </Form.Group>
+                                        </Col>
+                                        <Col>
+                                            <Form.Group className="mb-3" controlId="formGroupValor">
+                                                <Form.Label>Cantidad</Form.Label>
+                                                <Form.Control type="text" placeholder={currentProducto.cantidad} />
+                                            </Form.Group>
+                                        </Col>
+                                    </Row>
+                                </Form>
 
-                                    <Form>
-                                        <Row>
-                                            <Col>
-                                            <Link to={"/tutorials/" + currentProducto.id}>
-                                                <Button variant="outline-dark" size="lg">
+                                <Form>
+                                    <Row>
+                                        <Col>
+                                            <Link to={"/" + currentProducto.id}>
+                                                <Button variant="outline-dark"
+                                                    onClick={this.updateProductos}
+                                                    size="lg">
                                                     Actualizar Producto
                                                 </Button>
-                                                </Link>
-                                            </Col>
-                                        </Row>
-                                    </Form>
-                                </div>
-
-                                <Link
-                                    to={"/tutorials/" + currentProducto.id}
-                                    className="badge badge-warning"
-                                >
-                                    Actualizar
-                                </Link>
+                                            </Link>
+                                        </Col>
+                                    </Row>
+                                </Form>
                             </div>
                         ) : (
                             <div>

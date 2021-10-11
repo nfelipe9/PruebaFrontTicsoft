@@ -14,7 +14,7 @@ class TecsoftDataService {
   }
 
   update(id, data) {
-    return http.put(`/ActualizarProducto/${id}`, data);
+    return http.put(`/${id}`, data);
   }
 
 }
