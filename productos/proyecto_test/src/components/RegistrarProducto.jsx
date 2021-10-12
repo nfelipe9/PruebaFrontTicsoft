@@ -110,11 +110,10 @@ export default class RegistrarProducto extends Component {
                     </div>
                 ) : (
                     <div className="formSubmit">
-                        <Form>
+                        <Form id="formTest">
                             <Form.Group className="mb-3" controlId="formGroupNombre" >
                                 <Form.Label>Nombre</Form.Label>
                                 <Form.Control type="text"
-                                    id="nombre"
                                     required
                                     value={this.state.nombre}
                                     onChange={this.onChangeNombre}
@@ -123,7 +122,6 @@ export default class RegistrarProducto extends Component {
                             <Form.Group className="mb-3" controlId="formGroupDescripcion">
                                 <Form.Label>Descripcion</Form.Label>
                                 <Form.Control type="text"
-                                    id="descripcion"
                                     required
                                     value={this.state.descripcion}
                                     onChange={this.onChangeDescripcion}
@@ -132,7 +130,6 @@ export default class RegistrarProducto extends Component {
                             <Form.Group className="mb-3" controlId="formGroupCantidad">
                                 <Form.Label>Cantidad</Form.Label>
                                 <Form.Control type="text"
-                                    id="cantidad"
                                     required
                                     value={this.state.cantidad}
                                     onChange={this.onChangeCantidad}
@@ -141,14 +138,14 @@ export default class RegistrarProducto extends Component {
                             </Form.Group>
                             <Form.Group className="mb-3" controlId="formGroupValor">
                                 <Form.Label>Valor Unitario</Form.Label>
-                                <Form.Control type="text" 
-                                 id="valor"
-                                 required
-                                 value={this.state.valor}
-                                 onChange={this.onChangeValor}
-                                 name="valor"
-                                 placeholder="Valor Unitario" />
+                                <Form.Control type="text"
+                                    required
+                                    value={this.state.valor}
+                                    onChange={this.onChangeValor}
+                                    name="valor"
+                                    placeholder="Valor Unitario" />
                             </Form.Group>
+
                             <div className="d-grid gap-2">
                                 <Button variant="outline-dark"
                                     size="lg"

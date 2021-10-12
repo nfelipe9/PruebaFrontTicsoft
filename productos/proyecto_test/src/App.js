@@ -43,8 +43,9 @@ class App extends Component {
 
       <div className="container">
         <Switch>
-          <Route exact path={["/RegistrarProducto"]} component={RegistrarProducto} />
-          <Route exact path={["/", "/ActualizarProducto"]} component={ActualizarProducto} />
+          <Route exact path={["/","/ActualizarProducto"]} component={ActualizarProducto} />
+          <Route exact path="/RegistrarProducto" component={RegistrarProducto} />
+          <Route path="/ActualizarProducto/:id" component={ActualizarProducto} />
         </Switch>
       </div>
 

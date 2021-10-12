@@ -14,7 +14,25 @@ class TecsoftDataService {
   }
 
   update(id, data) {
-    return http.put(`/${id}`, data);
+    return http.put(`/actualizarproducto/${id}`, data);
+  }
+
+  //servicios ventas
+
+  obtenerTodos() {
+    return http.get("/");
+  }
+
+  obtener(id) {
+    return http.get(`/ActualizarProducto/${id}`);
+  }
+
+  crear(data) {
+    return http.post("/RegistrarProducto", data);
+  }
+
+  actualizar(id, data) {
+    return http.put(`/actualizarproducto/${id}`, data);
   }
 
 }
