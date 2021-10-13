@@ -7,6 +7,7 @@ import Container from 'react-bootstrap/esm/Container';
 import Nav from 'react-bootstrap/Nav';
 
 import {
+  BrowserRouter as Router,
   Route,
   Switch,
   Link
@@ -18,40 +19,48 @@ import ActualizarProducto from './components/ActualizarProducto';
 class App extends Component {
   render() {
     return (
-      <div>
-      <Navbar bg="dark" variant="dark">
-        <Container>
-          <Navbar.Brand href="/">Administrador</Navbar.Brand>
-
-          <Nav className="me-auto">
-            <Link to={"/RegistrarProducto"} className="nav-link">
-            <Nav>Registrar Producto</Nav>
-            </Link>
-            <Link to={"/ActualizarProducto"} className="nav-link">
-            <Nav>Actualizar Producto</Nav>
-            </Link>
-          </Nav>
-
-          <Navbar.Toggle />
-          <Navbar.Collapse className="justify-content-end">
-            <Navbar.Text>
-              Bienvenido: <a href="#login">@Username</a>
-            </Navbar.Text>
-          </Navbar.Collapse>
-        </Container>
-      </Navbar>
-
-      <div className="container">
-        <Switch>
-          <Route exact path={["/","/ActualizarProducto"]} component={ActualizarProducto} />
-          <Route exact path="/RegistrarProducto" component={RegistrarProducto} />
-          <Route path="/ActualizarProducto/:id" component={ActualizarProducto} />
-        </Switch>
-      </div>
-
-      </div>
-    );
+        <Test/>
+    )
   }
+}
+
+function Test() {
+  return <h3>Test</h3>
+}
+
+function Productos() {
+  <div>
+    <Navbar bg="dark" variant="dark">
+      <Container>
+        <Navbar.Brand href="/">Administrador</Navbar.Brand>
+
+        <Nav className="me-auto">
+          <Link to={"/RegistrarProducto"} className="nav-link">
+            <Nav>Registrar Producto</Nav>
+          </Link>
+          <Link to={"/ActualizarProducto"} className="nav-link">
+            <Nav>Actualizar Producto</Nav>
+          </Link>
+        </Nav>
+
+        <Navbar.Toggle />
+        <Navbar.Collapse className="justify-content-end">
+          <Navbar.Text>
+            Bienvenido: <a href="#login">@Username</a>
+          </Navbar.Text>
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
+
+    <div className="container">
+      <Switch>
+        <Route exact path={["/", "/ActualizarProducto"]} component={ActualizarProducto} />
+        <Route exact path="/RegistrarProducto" component={RegistrarProducto} />
+        <Route path="/ActualizarProducto/:id" component={ActualizarProducto} />
+      </Switch>
+    </div>
+
+  </div>
 }
 
 export default App;

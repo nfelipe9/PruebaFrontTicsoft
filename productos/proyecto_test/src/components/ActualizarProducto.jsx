@@ -231,7 +231,7 @@ export default class ActualizarProducto extends Component {
                             </Row>
                         </div>
 
-                    )};
+                    )}
 
 
                     <Row>
