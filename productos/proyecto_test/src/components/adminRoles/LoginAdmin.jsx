@@ -15,61 +15,69 @@ import {
     Link,
     useLocation,
     useHistory,
-    useParams
+    useParams,
+    Redirect
 } from "react-router-dom";
 
 
+const Greeting = (props) => {
 
-function ContainerAdmin() {
+    console.log(props)
 
-    const location = useLocation()
-    const history = useHistory()
-    const {id} = useParams()
+    const ContainerAdmin = () => {
 
-    const registrar = () => {
-        let path = (history.location.pathname)
-        history.push(`${id}/RegistrarProducto`)
+        const location = useLocation()
+        const history = useHistory()
+        const { rol } = useParams()
+
+        const addProduct = () => {
+            let path = (history.location.pathname)
+            let tiporol = "Administrador"
+            history.push(tiporol + "/RegistrarProducto")
+        }
+
+        const updateProduct = () => {
+            let path = (history.location.pathname)
+            //history.push(`ActualizarProducto`)
+        }
+
+        return (
+            <Container>
+                <Row>
+                    <Col xs={6} md={4}>
+                        <Card border="dark" style={{ width: '22rem' }}>
+                            <Card.Header>Registrar Producto</Card.Header>
+                            <Card.Body>
+                                <Card.Text>
+                                    Se podra registrar un nuevo producto.
+                                </Card.Text>
+                            </Card.Body>
+                            <Card.Body>
+                                <Button onClick={addProduct} variant="outline-dark">Acceder</Button>
+                            </Card.Body>
+
+                        </Card>
+                    </Col>
+
+                    <Col xs={6} md={4}>
+                        <Card border="dark" style={{ width: '22rem' }}>
+                            <Card.Header>Actualizar Productos</Card.Header>
+                            <Card.Body>
+                                <Card.Text>
+                                    Se podra buscar, listar y actualizar los productos.
+                                </Card.Text>
+                            </Card.Body>
+                            <Card.Body>
+                                <Button onClick={updateProduct} variant="outline-dark">Acceder</Button>
+                            </Card.Body>
+                        </Card>
+                    </Col>
+                </Row>
+            </Container>
+        )
     }
 
-    return (
-        <Container>
-            <Row>
-                <Col xs={6} md={4}>
-                    <Card border="dark" style={{ width: '22rem' }}>
-                        <Card.Header>Registrar Producto</Card.Header>
-                        <Card.Body>
-                            <Card.Text>
-                                Se podra registrar un nuevo producto.
-                            </Card.Text>
-                        </Card.Body>
-                        <Card.Body>
-                            <Button onClick={registrar} variant="outline-dark">Acceder</Button>
-                        </Card.Body>
-
-                    </Card>
-                </Col>
-
-                <Col xs={6} md={4}>
-                    <Card border="dark" style={{ width: '22rem' }}>
-                        <Card.Header>Actualizar Productos</Card.Header>
-                        <Card.Body>
-                            <Card.Text>
-                                Se podra buscar, listar y actualizar los productos.
-                            </Card.Text>
-                        </Card.Body>
-                        <Card.Body>
-                            <Link to="/ActualizarProducto"  >
-                                <Button variant="outline-dark">Acceder</Button>
-                            </Link>
-                        </Card.Body>
-                    </Card>
-                </Col>
-            </Row>
-        </Container>
-    )
-}
-
-function Greeting() {
+    console.log(props)
     return (
         <>
             <ContainerAdmin />

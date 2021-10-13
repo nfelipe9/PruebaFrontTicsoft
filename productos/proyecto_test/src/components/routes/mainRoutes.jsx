@@ -14,14 +14,13 @@ import {
 import LoginVendor from '../adminRoles/LoginVendor';
 import LoginAdmin from '../adminRoles/LoginAdmin';
 import MasterAdmin from '../adminRoles/MasterAdmin';
-import secRoutes from './secRoutes'
-import MainMenu from '../MainMenu'
+import NavbarMenu from '../MainMenu'
 import RegistrarProducto from '../productos/RegistrarProducto';
 import ActualizarProducto from '../productos/ActualizarProducto';
 import RegistrarVenta from '../ventas/RegistrarVenta';
 import ActualizarVenta from '../ventas/ActualizarVenta';
 import Button from '@restart/ui/esm/Button';
-
+import PageNotFound from '../PageNotFound'
 
 const roles = {
     "/Administrador": <LoginAdmin></LoginAdmin>,
@@ -29,48 +28,35 @@ const roles = {
     "/MasterAdmin": <MasterAdmin></MasterAdmin>
 }
 
-const MainRoutes = () => {
+const MainRoutes = (props) => {
 
+    let history=useHistory()
     let location = useLocation()
-    let {id} = useParams()
-    
+    let { rol } = useParams()
+    const [userData,setUserData]=useState(props.user)
+
     const [email, setEmail] = useState("")
+    const [shownav, setShownav] = useState(false)
 
     const route = () => {
         console.log(location.pathname)
         let email = location.pathname.split("=")
         return email
     }
-
-    const path = () => {
-        let rol = location.pathname.split("=")[0]
-        for (let key in roles) {
-            console.log(key)
-            if (key === rol) {
-                return roles[key]
-            }
-        }
-    }
-
-    useEffect(() => {
-        let data = JSON.parse(localStorage.getItem("actualUser"))
-        setEmail(data.email)
-        console.log(route())
-    }, [])
-
+    console.log(props)
     /*
     */
-
+    //console.log(userData)
     return (
-        <>
-            <MainMenu></MainMenu>
-            <Route exact path="/Administrador/:id" component={LoginAdmin} />
+        <>  
+            <NavbarMenu user={userData} clear={props.clear} ></NavbarMenu>
+            <Route exact path="/Administrador" component={LoginAdmin} />
             <Route exact path="/Vendedor" component={LoginVendor} />
             <Route exact path="/MasterAdmin" component={MasterAdmin} />
-            <Route exact path="/RegistrarVenta" component={RegistrarVenta} />
-            <Route exact path="/ActualizarVenta" component={ActualizarVenta} />
-            <Route exact path="/Administrador/:id/RegistrarProducto" component={RegistrarProducto} />
-            <Route exact path="/Administrador/:id/ActualizarProducto" component={ActualizarProducto} />
+            <Route exact path="/Vendedor/RegistrarVenta" component={RegistrarVenta} />
+            <Route exact path="/Vendedor/ActualizarVenta" component={ActualizarVenta} />
+            <Route exact path="/Administrador/RegistrarProducto" component={RegistrarProducto} />
+            <Route exact path="/Administrador/ActualizarProducto" component={ActualizarProducto} />
         </>
     )
 }

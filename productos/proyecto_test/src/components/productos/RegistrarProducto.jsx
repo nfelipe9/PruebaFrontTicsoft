@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 
 import '../cssStyles/general/Css.css'
 
@@ -12,18 +12,18 @@ import Row from 'react-bootstrap/Row';
 
 import { withRouter } from 'react-router-dom'
 
-function NavbarAdmin () {
+function NavbarAdmin() {
     return (
         <Navbar bg="dark" variant="dark">
-        <Container>
-            <Navbar.Brand href="#home">Administrador</Navbar.Brand>
-            <Navbar.Toggle />
-            <Navbar.Collapse className="justify-content-end">
-            <Navbar.Text>
-                Bienvenido: <a href="#login">@Username</a>
-            </Navbar.Text>
-            </Navbar.Collapse>
-        </Container>
+            <Container>
+                <Navbar.Brand href="#home">Administrador</Navbar.Brand>
+                <Navbar.Toggle />
+                <Navbar.Collapse className="justify-content-end">
+                    <Navbar.Text>
+                        Bienvenido: <a href="#login">@Username</a>
+                    </Navbar.Text>
+                </Navbar.Collapse>
+            </Container>
         </Navbar>
     )
 }
@@ -52,9 +52,9 @@ function RegistrarProducto() {
                     <Form.Control type="text" placeholder="Valor Unitario" />
                 </Form.Group>
                 <div className="d-grid gap-2">
-                <Button variant="outline-dark" size="lg" onClick={() => setShow(true)}>
-                    Registrar
-                </Button>
+                    <Button variant="outline-dark" size="lg" onClick={() => setShow(true)}>
+                        Registrar
+                    </Button>
                 </div>
             </Form>
 
@@ -74,12 +74,11 @@ function RegistrarProducto() {
 }
 
 function Greeting() {
-        return (
-            <>
-        <NavbarAdmin/> 
-        <RegistrarProducto/>
-            </>
-        )
+    return (
+        <>
+            <RegistrarProducto />
+        </>
+    )
 }
 
 export default Greeting;

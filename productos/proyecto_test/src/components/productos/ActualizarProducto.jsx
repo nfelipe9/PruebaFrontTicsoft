@@ -149,7 +149,6 @@ function ActualizarProducto() {
 function Greeting() {
         return (
             <>
-        <NavbarAdmin/> 
         <ActualizarProducto/>
             </>
         )

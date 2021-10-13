@@ -1,37 +1,52 @@
 import React, { Component, useState, useEffect } from 'react';
-import { GoogleLogin, useGoogleLogin, useGoogleLogout, } from 'react-google-login'
+
 import {
   BrowserRouter as Router,
   Route,
   Switch,
   useHistory,
+  BrowserRouterProps
 } from "react-router-dom";
+import Cookies, { Cookie} from 'universal-cookie'
 
-
-
-import LoginPage from './components/loginPrincipal/LoginPagina'
 import LoginBoton from './components/loginPrincipal/LoginBoton'
 import MainRoutes from './components/routes/mainRoutes'
-import { render } from 'react-dom';
+import LoginForm from './components/loginPrincipal/LoginForm';
+
+
 /*
 
 */
+const cookie = new Cookies();
 
 const App = () => {
 
   const history = useHistory()
-  //const [userSigned, setUserSigned] = useState(JSON.parse(localStorage.getItem("actualUser")).isSignedIn)
 
-  /*const session = () => {
-    setUserSigned(true)
-  }*/
+  const [userSigned, setUserSigned] = useState(cookie.get('userData'))
+  const [userRol, setUserRol]= useState("")
+
+  const assign = (data)=>{
+    setUserSigned(data)
+  }
+
+  const clearData = ()=>{
+    setUserSigned({})
+  }
+
+  //console.log(userSigned)
+ useEffect(() => {
+   setUserSigned(cookie.get('userData'))
+ }, [])
+
+ console.log(history)
 
   return (
     <>
-      <Router history={history} >
+      <Router>
         <Switch>
-          <Route exact path="/" component={LoginPage} />
-          <MainRoutes />
+          <Route exact path="/" render={() => <LoginForm userInfo={assign} info={history} />} ></Route>
+          <MainRoutes user={userSigned} clear={clearData}></MainRoutes>
         </Switch>
       </Router>
     </>
@@ -39,3 +54,10 @@ const App = () => {
 }
 
 export default App;
+/*{ 
+  !userSigned ?(
+    <h1>hola</h1>
+  ):(
+    <Route exact path="/" component={LoginForm} children={LoginForm(assign)} ></Route>
+  )
+}*/
