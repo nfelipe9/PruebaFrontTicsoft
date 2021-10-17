@@ -3,7 +3,6 @@ import React, {useState} from 'react'
 import './Css.css'
 
 import Form from "react-bootstrap/Form";
-import Navbar from 'react-bootstrap/Navbar';
 import Container from 'react-bootstrap/esm/Container';
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
@@ -11,22 +10,6 @@ import Toast from 'react-bootstrap/Toast';
 import Row from 'react-bootstrap/Row';
 import Table from 'react-bootstrap/Table';
 
-
-function NavbarVendor () {
-    return (
-        <Navbar bg="dark" variant="dark">
-        <Container>
-            <Navbar.Brand href="#home">Vendedor</Navbar.Brand>
-            <Navbar.Toggle />
-            <Navbar.Collapse className="justify-content-end">
-            <Navbar.Text>
-                Bienvenido: <a href="#login">@Username</a>
-            </Navbar.Text>
-            </Navbar.Collapse>
-        </Container>
-        </Navbar>
-    )
-}
 
 function ActualizarVenta() {
 
@@ -188,14 +171,4 @@ function ActualizarVenta() {
         </Container>
     )
 }
-
-function Greeting() {
-        return (
-            <>
-        <NavbarVendor/> 
-        <ActualizarVenta/>
-            </>
-        )
-}
-
-export default Greeting;
+export default ActualizarVenta;

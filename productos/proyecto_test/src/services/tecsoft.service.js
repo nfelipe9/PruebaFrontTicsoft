@@ -2,7 +2,7 @@ import http from "../http-common";
 
 class TecsoftDataService {
   getAll() {
-    return http.get("/");
+    return http.get("/obtenerProductos");
   }
 
   get(id) {
@@ -10,7 +10,7 @@ class TecsoftDataService {
   }
 
   create(data) {
-    return http.post("/RegistrarProducto", data);
+    return http.post("/registrarProducto", data);
   }
 
   update(id, data) {
@@ -19,20 +19,26 @@ class TecsoftDataService {
 
   //servicios ventas
 
-  obtenerTodos() {
-    return http.get("/");
+  obtenerVentas() {
+    return http.get("/obtenerVentas");
   }
 
   obtener(id) {
-    return http.get(`/ActualizarVenta/${id}`);
+    return http.get(`/actualizarVenta/${id}`);
   }
 
   crear(data) {
-    return http.post("/RegistrarVenta", data);
+    return http.post("/registrarVentas", data);
   }
 
   actualizar(id, data) {
-    return http.put(`/actualizarventa/${id}`, data);
+    return http.put(`/actualizarVentas/${id}`, data);
+  }
+
+  //servicios usuarios
+
+  obtenerUsuarios() {
+    return http.get("/obtenerUsuarios");
   }
 
 }
