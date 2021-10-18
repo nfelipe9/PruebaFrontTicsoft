@@ -1,52 +1,57 @@
-import React, { Component, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import {
   BrowserRouter as Router,
   Route,
   Switch,
   useHistory,
-  BrowserRouterProps
 } from "react-router-dom";
-import Cookies, { Cookie} from 'universal-cookie'
+import Cookies from 'universal-cookie'
 
-import LoginBoton from './components/loginPrincipal/LoginBoton'
 import MainRoutes from './components/routes/mainRoutes'
-import LoginForm from './components/loginPrincipal/LoginForm';
-
-
+import LoginPage from './components/loginPrincipal/LoginPage';
+import DeniedPage from './components/DeniedAccess'
+import NavbarMenu from './components/MainMenu';
 /*
 
 */
 const cookie = new Cookies();
 
 const App = () => {
-
   const history = useHistory()
+  
+  let sessionState = sessionStorage.getItem('isSignedIn')
+  //const location = useLocation()
 
-  const [userSigned, setUserSigned] = useState(cookie.get('userData'))
-  const [userRol, setUserRol]= useState("")
+  const [userSigned, setUserSigned] = useState(sessionState? (cookie.get('userData')):(null))
+  //const [SignedIn, setSignedIn] = useState(sessionState)
 
-  const assign = (data)=>{
+  const assign = (data) => {
     setUserSigned(data)
   }
 
-  const clearData = ()=>{
-    setUserSigned({})
+  const clearData = () => {
+    setUserSigned()
   }
 
-  //console.log(userSigned)
- useEffect(() => {
-   setUserSigned(cookie.get('userData'))
- }, [])
-
- console.log(history)
+  useEffect(() => {
+    if (!sessionState) {
+      cookie.remove('userData')
+    }
+  },)
 
   return (
     <>
       <Router>
+        <NavbarMenu user={userSigned} clear={clearData} ></NavbarMenu>
         <Switch>
-          <Route exact path="/" render={() => <LoginForm userInfo={assign} info={history} />} ></Route>
-          <MainRoutes user={userSigned} clear={clearData}></MainRoutes>
+          <Route exact path="/" render={() => <LoginPage userInfo={assign} info={history} />} />
+          {!userSigned ? (
+            <Route path="*" component={DeniedPage} />
+          ) : (
+            <MainRoutes user={userSigned} />
+          )
+          }
         </Switch>
       </Router>
     </>
@@ -54,10 +59,3 @@ const App = () => {
 }
 
 export default App;
-/*{ 
-  !userSigned ?(
-    <h1>hola</h1>
-  ):(
-    <Route exact path="/" component={LoginForm} children={LoginForm(assign)} ></Route>
-  )
-}*/

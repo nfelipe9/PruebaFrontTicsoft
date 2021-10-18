@@ -10,7 +10,6 @@ import Col from 'react-bootstrap/Col';
 import Toast from 'react-bootstrap/Toast';
 import Row from 'react-bootstrap/Row';
 
-import { withRouter } from 'react-router-dom'
 
 function NavbarAdmin() {
     return (
@@ -28,7 +27,7 @@ function NavbarAdmin() {
     )
 }
 
-function RegistrarProducto() {
+const RegistrarProducto = () => {
 
     const [show, setShow] = useState(false);
 
@@ -73,12 +72,5 @@ function RegistrarProducto() {
     )
 }
 
-function Greeting() {
-    return (
-        <>
-            <RegistrarProducto />
-        </>
-    )
-}
 
-export default Greeting;
+export default RegistrarProducto;
