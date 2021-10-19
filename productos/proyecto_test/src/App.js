@@ -29,6 +29,8 @@ class App extends Component {
 function Ventas() {
   return (
     <div>
+
+      {/* //Borrar */}
       <Navbar bg="dark" variant="dark">
         <Container>
           <Navbar.Brand href="/">Vendedor</Navbar.Brand>
@@ -50,10 +52,12 @@ function Ventas() {
           </Navbar.Collapse>
         </Container>
       </Navbar>
+  {/* //Borrar */}
+
       <div className="container">
         <Switch>
-          <Route exact path={["/", "/RegistrarVenta"]} component={RegistrarVenta} />
-          <Route exact path="/ActualizarVenta" component={ActualizarVenta} />
+          <Route exact path={["/", "/ActualizarVenta"]} component={ActualizarVenta} />
+          <Route exact path="/RegistrarVenta" component={RegistrarVenta} />
           <Route path="/ActualizarVenta/:id" component={ActualizarVenta} />
         </Switch>
       </div>
@@ -65,6 +69,8 @@ function Ventas() {
 function Productos() {
   return (
     <div>
+
+      {/* //Borrar */}
       <Navbar bg="dark" variant="dark">
         <Container>
           <Navbar.Brand href="/">Administrador</Navbar.Brand>
@@ -86,6 +92,7 @@ function Productos() {
           </Navbar.Collapse>
         </Container>
       </Navbar>
+      {/* //Borrar */}
 
       <div className="container">
         <Switch>
