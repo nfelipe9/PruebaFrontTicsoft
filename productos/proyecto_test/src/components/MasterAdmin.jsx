@@ -1,140 +1,274 @@
-import React, {useState} from 'react'
+import React, { Component } from 'react';
+import TecsoftDataService from "../services/tecsoft.service";
 
-import InputGroup from 'react-bootstrap/InputGroup';
+import './Css.css';
+
+import Table from 'react-bootstrap/Table';
 import Container from 'react-bootstrap/esm/Container';
-import FormControl from 'react-bootstrap/FormControl';
-import Dropdown from 'react-bootstrap/Dropdown';
-import DropdownButton from 'react-bootstrap/DropdownButton';
-import Row from 'react-bootstrap/esm/Row';
-import Table from 'react-bootstrap/esm/Table';
-import Navbar from 'react-bootstrap/Navbar';
-import Form from 'react-bootstrap/Form';
+import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import Form from "react-bootstrap/Form";
 import Button from 'react-bootstrap/Button';
 import Toast from 'react-bootstrap/Toast';
 
-function NavbarMaster() {
-    return (
-        <Navbar bg="dark" variant="dark">
-            <Container>
-                <Navbar.Brand href="#home">Master Admin</Navbar.Brand>
-                <Navbar.Toggle />
-                <Navbar.Collapse className="justify-content-end">
-                    <Navbar.Text>
-                        Bienvenido: <a href="#login">@Username</a>
-                    </Navbar.Text>
-                </Navbar.Collapse>
-            </Container>
-        </Navbar>
-    )
-}
+export default class MasterAdmin extends Component {
+    constructor(props) {
+        super(props);
+        this.retrieveUsuarios = this.retrieveUsuarios.bind(this);
+        this.refreshList = this.refreshList.bind(this);
+        this.setActiveUsuarios = this.setActiveUsuarios.bind(this);
+        this.updateUsuario = this.updateUsuario.bind(this);
+        this.onChangeFirstName = this.onChangeFirstName.bind(this);
+        /* this.onChangeLastName = this.onChangeLastName.bind(this);
+        this.onChangeEmail = this.onChangeEmail.bind(this);
+        this.onChangeRol = this.onChangeRol.bind(this); */
 
-function MasterAdmin() {
-    
-    const [show, setShow] = useState(false);
 
-    return (
-        <Container>
-            <Row>
-                <InputGroup className="mb-3">
-                    <FormControl placeholder="Id" disabled />
-                    <FormControl aria-label="Nombre" placeholder="Nombre" />
+        this.state = {
+            usuarios: [],
+            currentUsuario: null,
+            currentIndex: -1,
+            FirstName: "",
 
-                    <DropdownButton
-                        variant="outline-secondary"
-                        title="Rol Usuario"
-                        id="input-group-dropdown-2"
-                        align="end"
-                    >
-                        <Dropdown.Item href="#">Administrador</Dropdown.Item>
-                        <Dropdown.Item href="#">Vendedor</Dropdown.Item>
-                    </DropdownButton>
+            updated: false
+        };
+    }
 
-                    <FormControl aria-label="Rol" placeholder="Rol" disabled />
+    componentDidMount() {
+        this.retrieveUsuarios();
+    }
 
-                    <DropdownButton
-                        variant="outline-secondary"
-                        title="Estado Usuario"
-                        id="input-group-dropdown-2"
-                        align="end"
-                    >
-                        <Dropdown.Item href="#">Pendiente</Dropdown.Item>
-                        <Dropdown.Item href="#">Autorizado</Dropdown.Item>
-                        <Dropdown.Item href="#">No Autorizado</Dropdown.Item>
-                    </DropdownButton>
+    retrieveUsuarios() {
+        TecsoftDataService.obtenerUsuarios()
+            .then(response => {
+                this.setState({
+                    usuarios: response.data,
+                    updated:false
+                });
+                console.log(response.data);
+            })
+            .catch(e => {
+                console.log(e);
+            });
+    }
 
-                    <FormControl aria-label="Estado Usuario" placeholder="Estado" disabled />
+    refreshList() {
+        this.retrieveUsuarios();
+        this.setState({
+            currentUsuario: null,
+            currentIndex: -1
+        });
+    }
 
-                </InputGroup>
+    updateUsuario() {
+        TecsoftDataService.actualizarUsuarios(
+            this.state.currentUsuario.id,
+            this.state.currentUsuario
+        )
+            .then(response => {
+                console.log(response.data);
+                this.setState({
+                    message: "Usuario updated successfully!",
+                    updated: true
+                });
+            })
+            .catch(e => {
+                console.log(e);
+            });
+    }
 
-                <Form>
+    onChangeFirstName(e) {
+        const FirstName = e.target.value;
+        this.setState(function (prevState) {
+            return {
+                currentUsuario: {
+                    ...prevState.currentUsuario,
+                    FirstName: FirstName
+                }
+            };
+        });
+    }
+
+    onChangeDescripcion(e) {
+        const descripcion = e.target.value;
+        this.setState(function (prevState) {
+            return {
+                currentProducto: {
+                    ...prevState.currentProducto,
+                    descripcion: descripcion
+                }
+            };
+        });
+    }
+
+    onChangeValor(e) {
+        const valor = e.target.value;
+        this.setState(function (prevState) {
+            return {
+                currentProducto: {
+                    ...prevState.currentProducto,
+                    valor: valor
+                }
+            };
+        });
+    }
+
+    onChangeCantidad(e) {
+        const cantidad = e.target.value;
+        this.setState(function (prevState) {
+            return {
+                currentProducto: {
+                    ...prevState.currentProducto,
+                    cantidad: cantidad
+                }
+            };
+        });
+    }
+
+    setActiveUsuarios(usuario, index) {
+        this.setState({
+            currentUsuario: usuario,
+            currentIndex: index
+        });
+    }
+
+
+    render() {
+
+        const { usuarios, currentUsuario, currentIndex } = this.state;
+
+        return (
+
+            <div className="listItems">
+                <Container>
+
+{/*                     {this.state.updated ? (
+                        <div className="toastSucess">
+                            <Toast onClose={this.retrieveProductos} className="toastS">
+                                <Toast.Header>
+                                    <strong className="me-auto">Correcto</strong>
+                                    <small>Ahora</small>
+                                </Toast.Header>
+                                <Toast.Body>Producto Actualizado Correctamente</Toast.Body>
+                            </Toast>
+                        </div>
+                    ) : (
+
+                        <div className="Productos">
+                            <Row>
+                                {currentProducto ? (
+                                    <div>
+                                        <Form>
+                                            <Row>
+                                                <Col>
+                                                    <Form.Group className="mb-3" controlId="formGroupID">
+                                                        <Form.Label>Id Producto</Form.Label>
+                                                        <Form.Control type="text"
+                                                            placeholder={currentProducto.id} disabled />
+                                                    </Form.Group>
+                                                </Col>
+                                                <Col>
+                                                    <Form.Group className="mb-3" controlId="formGroupNombre">
+                                                        <Form.Label>Nombre Producto</Form.Label>
+                                                        <Form.Control type="text"
+                                                            value={currentProducto.nombre}
+                                                            onChange={this.onChangeNombre} />
+                                                    </Form.Group>
+                                                </Col>
+                                                <Col>
+                                                    <Form.Group className="mb-3" controlId="formGroupDescripcion">
+                                                        <Form.Label>Descripcion Producto</Form.Label>
+                                                        <Form.Control type="text" 
+                                                            value={currentProducto.descripcion}
+                                                            onChange={this.onChangeDescripcion}
+                                                            />
+                                                    </Form.Group>
+                                                </Col>
+                                            </Row>
+                                        </Form>
+                                        <Form>
+                                            <Row>
+                                                <Col>
+                                                    <Form.Group className="mb-3" controlId="formGroupValor">
+                                                        <Form.Label>Valor Unitario</Form.Label>
+                                                        <Form.Control type="text"
+                                                            value={currentProducto.valor}
+                                                            onChange={this.onChangeValor} />
+                                                    </Form.Group>
+                                                </Col>
+                                                <Col>
+                                                    <Form.Group className="mb-3" controlId="formGroupCantidad">
+                                                        <Form.Label>Cantidad</Form.Label>
+                                                        <Form.Control type="text" 
+                                                            value={currentProducto.cantidad}
+                                                            onChange={this.onChangeCantidad}/>
+                                                    </Form.Group>
+                                                </Col>
+                                            </Row>
+                                        </Form>
+
+                                        <Form>
+                                            <Row>
+                                                <Col>
+                                                    <Button variant="outline-dark"
+                                                        to={"/actualizarproducto/" + currentProducto.id}
+                                                        onClick={this.updateProductos}
+                                                        size="lg">
+                                                        Actualizar Producto
+                                                    </Button>
+                                                </Col>
+                                            </Row>
+                                        </Form>
+                                    </div>
+                                ) : (
+                                    <div>
+                                        <br />
+                                        <p>Selecciona un Producto</p>
+                                    </div>
+                                )}
+
+
+                            </Row>
+                        </div>
+
+                    )}
+ */}
+
                     <Row>
-                        <Col>
-                            <Button variant="outline-dark" size="lg" onClick={() => setShow(true)}>
-                                Actualizar Usuario
-                            </Button>
-                        </Col>
+                        <ul className="list-group">
+                            {usuarios && usuarios.map((usuario, index) => (
+
+                                <li
+                                    className={"list-group-item " + (index === currentIndex ? "active" : "")}
+                                    onClick={() => this.setActiveUsuarios(usuario, index)}
+                                    key={index}
+                                >
+                                    <Table striped bordered hover variant="dark">
+                                        <thead>
+                                            <tr>
+                                                <th>Id Producto</th>
+                                                <th>Nombre</th>
+                                                <th>Email</th>
+                                                <th>Rol</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>{usuario.id}</td>
+                                                <td>{usuario.FirstName}</td>
+                                                <td>{usuario.Email}</td>
+                                                <td>{usuario.Rol}</td>
+                                            </tr>
+                                        </tbody>
+                                    </Table>
+                                </li>
+
+                            ))}
+                        </ul>
                     </Row>
-                </Form>
-            </Row>
+                </Container>
+            </div>
+        );
 
-            <Col xs={4} className="toastTst">
-                <Toast onClose={() => setShow(false)} show={show} delay={3000} autohide>
-                    <Toast.Header>
-                        <strong className="me-auto">Correcto</strong>
-                        <small>Ahora</small>
-                    </Toast.Header>
-                    <Toast.Body>Usuario Actualizado con Exito</Toast.Body>
-                </Toast>
-            </Col>
-
-            <Row>
-                <Table striped bordered hover variant="dark">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Id Usuario</th>
-                            <th>Nombre</th>
-                            <th>Rol</th>
-                            <th>Estado</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>123</td>
-                            <td>Pepe</td>
-                            <td>Administrador</td>
-                            <td>Autorizado</td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>345</td>
-                            <td>Roberto</td>
-                            <td>Vendedor</td>
-                            <td>Pendiente</td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>567</td>
-                            <td>Marcos</td>
-                            <td>Vendedor</td>
-                            <td>No-Autorizado</td>
-                        </tr>
-                    </tbody>
-                </Table>
-            </Row>
-        </Container>
-    )
+    }
 }
-
-function Greeting() {
-    return (
-        <>
-            <NavbarMaster />
-            <MasterAdmin />
-        </>
-    )
-}
-
-export default Greeting;

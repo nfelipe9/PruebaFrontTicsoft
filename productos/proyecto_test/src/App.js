@@ -18,10 +18,12 @@ import ActualizarProducto from './components/ActualizarProducto';
 import RegistrarVenta from './components/RegistrarVenta';
 import ActualizarVenta from './components/ActualizarVenta';
 
+import ActualizarUsuario from './components/MasterAdmin';
+
 class App extends Component {
   render() {
     return (
-      <Ventas />
+      <MasterAdmin />
     )
   }
 }
@@ -99,6 +101,21 @@ function Productos() {
           <Route exact path={["/", "/ActualizarProducto"]} component={ActualizarProducto} />
           <Route exact path="/RegistrarProducto" component={RegistrarProducto} />
           <Route path="/ActualizarProducto/:id" component={ActualizarProducto} />
+        </Switch>
+      </div>
+
+    </div>
+  )
+}
+
+function MasterAdmin() {
+  return (
+    <div>
+
+      <div className="container">
+        <Switch>
+          <Route exact path={["/", "/MasterAdmin"]} component={ActualizarUsuario} />
+          <Route path="/MasterAdmin/:id" component={MasterAdmin} />
         </Switch>
       </div>
 
