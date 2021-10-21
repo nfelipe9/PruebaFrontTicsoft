@@ -11,34 +11,28 @@ import Nav from 'react-bootstrap/Nav';
 import { GoogleLogout } from 'react-google-login'
 import { useHistory, useLocation } from 'react-router-dom';
 import Cookies from 'universal-cookie'
+import { roles } from './adminRoles/UserArrays'
 
 const cookie = new Cookies();
 
-const admin = [["Home", "Home"],
+/*export const admin = [["", "Home"],
 ["RegistrarProducto", "Registrar Producto"],
 ["ActualizarProducto", "Actualizar Producto"],
 ["RegistrarVenta", "Registrar Venta"],
 ["ActualizarVenta", "Actualizar Venta"]]
 
-const vendor = [["Home", "Home"],
+export const vendor = [["", "Home"],
 ["RegistrarVenta", "Registrar Venta"],
-["ActualizarVenta", "Actualizar Venta"]]
+["ActualizarVenta", "Actualizar Venta"]]*/
+
 
 const NavbarMenu = (props) => {
-
 
     let history = useHistory();
     let location = useLocation()
     let userData = props.user
     let clearData = props.clear
-
     var pathPos = location.pathname.split("/")[2]
-
-    if (userData) {
-        var rol = userData.uRol
-        var items;
-        var menu = "Home";
-    }
 
     const AccountLogout = () => {
         clearData()
@@ -51,51 +45,46 @@ const NavbarMenu = (props) => {
         history.push(`/${rol}/${route}`)
     }
 
-    if (rol === "Administrador") {
-        items =
-            admin.map((element, index) => (
-                <NavDropdown.Item key={index}
-                    active={(element[0] === pathPos)}
-                    eventKey={element[0]}
-                >{element[1]}</NavDropdown.Item>
-            )
-            )
-        admin.map((element) => {
-            if (element[0] === pathPos) {
-                menu = element[1]
-            }
-        }
-        )
-    } else if (rol === "Vendedor") {
-        items =
-            vendor.map((element, index) => (
-                <NavDropdown.Item key={index}
-                    active={(element[0] === pathPos)}
-                    eventKey={element[0]}
-                >{element[1]}</NavDropdown.Item>
-            )
-            )
-        vendor.map((element) => {
-            if (element[0] === pathPos) {
-                menu = element[1]
-            }
-        }
-        )
-    }
+    if (userData) {
+        var rol = userData.uRol;
+        var items;
+        var subItems;
+        var menu;
+        var Roles = roles()
+        const [actualRol] = Roles.filter(selectedRol => selectedRol[0] === rol)
 
-    /* 
-    <NavDropdown.Item eventKey="1" >Action</NavDropdown.Item>
-    */
+        items =
+            actualRol[1].map((element, index) => {
+                subItems =
+                    element[1].map((option, index) => {
+                        (option[0] === pathPos) && (menu = option[1])
+                        return (
+                            <NavDropdown.Item key={index}
+                                active={(option[0] === pathPos)}
+                                eventKey={option[0]}
+                            >{option[1]}</NavDropdown.Item>)
+                    }
+                    )
+                return (
+                    <>
+                        {subItems}
+                        {index < actualRol[1].length - 1 && <NavDropdown.Divider key={index} />}
+                    </>
+                )
+            }
+            )
+
+    }
     return (
         <>
-            {(userData && location.pathname !== "/") ? (
+            {(userData && location.pathname !== "/") && (
                 <Navbar bg="dark" variant="dark">
                     <Container style={{ display: "flex", flexDirection: "row", minWidth: "100%", maxHeight: "60px" }} >
                         <Navbar.Brand>{rol}</Navbar.Brand>
                         <Nav>
                             <NavDropdown
                                 id="nav-dropdown-dark-example"
-                                title={menu}
+                                title={menu || "Not Found"}
                                 menuVariant="dark"
                                 onSelect={handleOptions}
                             >
@@ -105,7 +94,7 @@ const NavbarMenu = (props) => {
                         <Navbar.Collapse className="justify-content-end" style={{ gap: "10px" }} >
                             <Navbar.Text >
                                 Bienvenido: <a href="#login" >{userData.uFirstName} {userData.uLastName}
-                                    <span><img style={{ borderRadius: "35px", maxWidth: "40px", marginLeft: "10px" }} src={userData.uImageUrl} ></img></span>
+                                    <span><img style={{ borderRadius: "35px", maxWidth: "40px", marginLeft: "10px" }} src={userData.uImageUrl} alt="User" ></img></span>
                                 </a>
                             </Navbar.Text>
                             <GoogleLogout className="google"
@@ -116,8 +105,6 @@ const NavbarMenu = (props) => {
                         </Navbar.Collapse>
                     </Container>
                 </Navbar>
-            ) : (
-                null
             )}
 
         </>
@@ -125,14 +112,14 @@ const NavbarMenu = (props) => {
 }
 
 export default NavbarMenu;
-/*
-       optionRol =
-            <Nav className="me-auto">
-                <Link to={`/${rol}/RegistrarVenta`} className="nav-link">
-                    <Nav>Registrar Venta</Nav>
-                </Link>
-                <Link to={`/${rol}/ActualizarVenta`} className="nav-link">
-                    <Nav>Actualizar Venta</Nav>
-                </Link>
-            </Nav>
-*/
+    /*if (rol === "Administrador") {
+items =
+admin.map((element, index) => {
+element[0]===pathPos && (menu = element[1])
+return(
+<NavDropdown.Item key={index}
+active={(element[0] === pathPos)}
+eventKey={element[0]}
+>{element[1]}</NavDropdown.Item>)
+}
+)*/

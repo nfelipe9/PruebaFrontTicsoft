@@ -10,22 +10,6 @@ import Col from 'react-bootstrap/Col';
 import Toast from 'react-bootstrap/Toast';
 import Row from 'react-bootstrap/Row';
 
-function NavbarVendor () {
-    return (
-        <Navbar bg="dark" variant="dark">
-        <Container>
-            <Navbar.Brand href="#home">Vendedor</Navbar.Brand>
-            <Navbar.Toggle />
-            <Navbar.Collapse className="justify-content-end">
-            <Navbar.Text>
-                Bienvenido: <a href="#login">@Username</a>
-            </Navbar.Text>
-            </Navbar.Collapse>
-        </Container>
-        </Navbar>
-    )
-}
-
 function RegistrarVenta() {
 
     const [show, setShow] = useState(false);
@@ -110,13 +94,4 @@ function RegistrarVenta() {
     )
 }
 
-function Greeting() {
-        return (
-            <>
-        <NavbarVendor/> 
-        <RegistrarVenta/>
-            </>
-        )
-}
-
-export default Greeting;
+export default RegistrarVenta

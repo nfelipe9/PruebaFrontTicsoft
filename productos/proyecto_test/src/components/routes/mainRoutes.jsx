@@ -1,47 +1,38 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import {
     Route,
     Switch,
     useLocation,
-    withRouter,
 } from "react-router-dom";
 
-
-import LoginVendor from '../adminRoles/LoginVendor';
-import LoginAdmin from '../adminRoles/LoginAdmin';
-import MasterAdmin from '../adminRoles/MasterAdmin';
-import RegistrarProducto from '../productos/RegistrarProducto';
-import ActualizarProducto from '../productos/ActualizarProducto';
-import RegistrarVenta from '../ventas/RegistrarVenta';
-import ActualizarVenta from '../ventas/ActualizarVenta';
 import PageNotFound from '../PageNotFound'
+import { roles } from '../adminRoles/UserArrays'
 
+const MainRoutes = ({ ...props }) => {
 
-const MainRoutes = (props) => {
+    const userData = props.user
+    let routes = roles()
+    var sub
 
-    let location = useLocation()
-    const [userData, setUserData] = useState(props.user)
+    const [actualRoutes] = routes.filter(selectedRol => selectedRol[0] === userData.uRol)
 
-
-    /*
-    <Route exact path="/404" component={PageNotFound}></Route>
-    <Redirect from="*" to="/404" />
-    
-    */
-
+  
     return (
         <Switch>
-            <Route exact path="/Administrador/Home">
-                <LoginAdmin rol={userData.uRol} />
-            </Route>
-            <Route exact path="/Vendedor/Home" component={LoginVendor} />
-            <Route exact path="/MasterAdmin/Home" component={MasterAdmin} />
-            <Route exact path="/Vendedor/RegistrarVenta" component={RegistrarVenta} />
-            <Route exact path="/Vendedor/ActualizarVenta" component={ActualizarVenta} />
-            <Route exact path="/Administrador/RegistrarProducto" component={RegistrarProducto} />
-            <Route exact path="/Administrador/ActualizarProducto" component={ActualizarProducto} />
-            <Route path="*">
+            {actualRoutes[1].map((element, index) => {
+                sub =
+                    element[1].map((option, index) => {
+                        return <Route key={index} exact path={`/${userData.uRol}/${option[0]}`} component={option[2]} />
+                    }
+                    )
+                return (
+                    [sub]
+                )
+            }
+            )
+            }
+            <Route path="*" component={PageNotFound} >
                 <PageNotFound home={userData.uRol} />
             </Route>
         </Switch>
@@ -49,4 +40,17 @@ const MainRoutes = (props) => {
     )
 }
 
-export default withRouter(MainRoutes)
+export default MainRoutes
+
+/*
+<Route exact path="/Administrador/" component={LoginAdmin} />
+<Route exact path="/Vendedor/" component={LoginVendor} />
+<Route exact path="/MasterAdmin/Home">
+    <MasterAdmin rol={userData.uRol} />
+</Route>
+<Route exact path="/Vendedor/RegistrarVenta" component={RegistrarVenta} />
+<Route exact path="/Vendedor/ActualizarVenta" component={ActualizarVenta} />
+<Route exact path="/Administrador/RegistrarProducto" component={RegistrarProducto} />
+<Route exact path="/Administrador/ActualizarProducto" component={ActualizarProducto} />
+
+*/

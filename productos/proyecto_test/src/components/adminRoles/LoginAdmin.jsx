@@ -10,22 +10,21 @@ import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
 
 import {
-    useHistory,    
+    useHistory
 } from "react-router-dom";
 
 
-const LoginAdmin = (props) => {
+const LoginAdmin = ({...props}) => {
 
     let history = useHistory()
-    let rol = props.rol
-
+ 
 
     const addProduct = () => {
-        history.push("/" + rol + "/RegistrarProducto")
+        history.push("RegistrarProducto")
     }
 
     const updateProduct = () => {
-        history.push("/" + rol + "/ActualizarProducto")
+        history.push("ActualizarProducto")
     }
 
     return (

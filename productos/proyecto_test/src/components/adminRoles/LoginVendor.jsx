@@ -2,7 +2,6 @@ import React from 'react'
 
 import '../cssStyles/general/Css.css'
 
-import Navbar from 'react-bootstrap/Navbar';
 import Container from 'react-bootstrap/Container';
 import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
@@ -10,12 +9,21 @@ import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
 
 import {
-    BrowserRouter as Router,
-    Link
+    useHistory
 } from "react-router-dom";
 
-const LoginVendor = () => {
+const LoginVendor = ({...props}) => {
 
+    let history = useHistory()
+
+
+    const addVenta = () => {
+        history.push("RegistrarVenta")
+    }
+
+    const updateVenta = () => {
+        history.push("ActualizarVenta")
+    }
 
     return (
         <Container>
@@ -29,9 +37,7 @@ const LoginVendor = () => {
                             </Card.Text>
                         </Card.Body>
                         <Card.Body>
-                            <Link to="/RegistrarVenta">
-                                <Button variant="outline-dark">Acceder</Button>
-                            </Link>
+                                <Button onClick={addVenta} variant="outline-dark">Acceder</Button>
                         </Card.Body>
 
                     </Card>
@@ -46,9 +52,7 @@ const LoginVendor = () => {
                             </Card.Text>
                         </Card.Body>
                         <Card.Body>
-                            <Link to="/ActualizarVenta">
-                                <Button variant="outline-dark">Acceder</Button>
-                            </Link>
+                                <Button onClick={updateVenta} variant="outline-dark">Acceder</Button>
                         </Card.Body>
                     </Card>
                 </Col>

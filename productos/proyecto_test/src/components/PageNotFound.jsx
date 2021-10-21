@@ -2,12 +2,12 @@ import React from 'react'
 import {useHistory} from 'react-router-dom'
 import './cssStyles/general/style404.css'
 
-const PageNotFound = (props) => {
+const PageNotFound = ({...props}) => {
     let home = props.home
     let history = useHistory()
 
     const goHome =()=>{
-        history.push(`/${home}/Home`)
+        history.push(`/${home}/`)
     }
     return (
         <div>

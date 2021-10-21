@@ -55,7 +55,7 @@ const LoginPage = (props) => {
             let resStatus = 200
             let email = responseGoogle.profileObj.email
             //console.log(responseGoogle.isSignedIn())
-            fetch(`http://localhost:3100/api/users/${email}`, { method: "get" })
+            fetch(`http://localhost:8080/api/users/${email}`, { method: "get" })
                 .then(res => {
                     resStatus = res.status
                     console.log(resStatus)
@@ -80,11 +80,11 @@ const LoginPage = (props) => {
                         setSigned(false)
                         handleShow()
                     } else {
-                        props.userInfo(user)
-                        cookie.set('userData', user)
                         setSigned(true)
+                        cookie.set('userData', user)
                         sessionStorage.setItem('isSignedIn', signed)
-                        history.push(`/${user.uRol}/Home`)
+                        props.userInfo(user)
+                        history.push(`${user.uRol}/`)
                     }
                 })
                 .catch((err) => {
@@ -124,7 +124,7 @@ const LoginPage = (props) => {
     const registerUser = () => {
         let resStatus = 200
 
-        fetch(`http://localhost:3100/api/users`,
+        fetch(`http://localhost:8080/api/users`,
             {
                 method: "post",
                 headers: {
@@ -178,7 +178,7 @@ const LoginPage = (props) => {
         } else {
             setValue(false)
         }
-    },)
+    })
 
     return (
         <>

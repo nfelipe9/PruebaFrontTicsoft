@@ -4,7 +4,6 @@ import {
   BrowserRouter as Router,
   Route,
   Switch,
-  useHistory,
 } from "react-router-dom";
 import Cookies from 'universal-cookie'
 
@@ -18,9 +17,8 @@ import NavbarMenu from './components/MainMenu';
 const cookie = new Cookies();
 
 const App = () => {
-  const history = useHistory()
   
-  let sessionState = sessionStorage.getItem('isSignedIn')
+  const sessionState = sessionStorage.getItem('isSignedIn')
   //const location = useLocation()
 
   const [userSigned, setUserSigned] = useState(sessionState? (cookie.get('userData')):(null))
@@ -34,18 +32,20 @@ const App = () => {
     setUserSigned()
   }
 
+  console.log(sessionState)
+
   useEffect(() => {
     if (!sessionState) {
       cookie.remove('userData')
     }
-  },)
+  },[sessionState])
 
   return (
     <>
       <Router>
         <NavbarMenu user={userSigned} clear={clearData} ></NavbarMenu>
         <Switch>
-          <Route exact path="/" render={() => <LoginPage userInfo={assign} info={history} />} />
+          <Route exact path="/" render={() => <LoginPage userInfo={assign}/>} />
           {!userSigned ? (
             <Route path="*" component={DeniedPage} />
           ) : (

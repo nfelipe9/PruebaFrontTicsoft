@@ -12,21 +12,6 @@ import Row from 'react-bootstrap/Row';
 import Table from 'react-bootstrap/Table';
 
 
-function NavbarVendor () {
-    return (
-        <Navbar bg="dark" variant="dark">
-        <Container>
-            <Navbar.Brand href="#home">Vendedor</Navbar.Brand>
-            <Navbar.Toggle />
-            <Navbar.Collapse className="justify-content-end">
-            <Navbar.Text>
-                Bienvenido: <a href="#login">@Username</a>
-            </Navbar.Text>
-            </Navbar.Collapse>
-        </Container>
-        </Navbar>
-    )
-}
 
 function ActualizarVenta() {
 
@@ -189,13 +174,5 @@ function ActualizarVenta() {
     )
 }
 
-function Greeting() {
-        return (
-            <>
-        <NavbarVendor/> 
-        <ActualizarVenta/>
-            </>
-        )
-}
 
-export default Greeting;
+export default ActualizarVenta
