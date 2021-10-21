@@ -1,157 +1,276 @@
-import React, {useState} from 'react'
+import React, { Component } from 'react';
+import TecsoftDataService from "../services/tecsoft.service";
 
-import '../cssStyles/general/Css.css'
+import './Css.css';
 
-import Form from "react-bootstrap/Form";
-import Navbar from 'react-bootstrap/Navbar';
-import Container from 'react-bootstrap/esm/Container';
-import Button from 'react-bootstrap/Button';
-import Col from 'react-bootstrap/Col';
-import Toast from 'react-bootstrap/Toast';
-import Row from 'react-bootstrap/Row';
 import Table from 'react-bootstrap/Table';
+import Container from 'react-bootstrap/esm/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Form from "react-bootstrap/Form";
+import Button from 'react-bootstrap/Button';
+import Toast from 'react-bootstrap/Toast';
+
+export default class ActualizarProducto extends Component {
+    constructor(props) {
+        super(props);
+        this.retrieveProductos = this.retrieveProductos.bind(this);
+        this.refreshList = this.refreshList.bind(this);
+        this.setActiveProductos = this.setActiveProductos.bind(this);
+        this.updateProductos = this.updateProductos.bind(this);
+        this.onChangeNombre = this.onChangeNombre.bind(this);
+        this.onChangeDescripcion = this.onChangeDescripcion.bind(this);
+        this.onChangeValor = this.onChangeValor.bind(this);
+        this.onChangeCantidad = this.onChangeCantidad.bind(this);
 
 
-function NavbarAdmin () {
-    return (
-        <Navbar bg="dark" variant="dark">
-        <Container>
-            <Navbar.Brand href="#home">Administrador</Navbar.Brand>
-            <Navbar.Toggle />
-            <Navbar.Collapse className="justify-content-end">
-            <Navbar.Text>
-                Bienvenido: <a href="#login">@Username</a>
-            </Navbar.Text>
-            </Navbar.Collapse>
-        </Container>
-        </Navbar>
-    )
-}
+        this.state = {
+            productos: [],
+            currentProducto: null,
+            currentIndex: -1,
+            nombre: "",
 
-function ActualizarProducto() {
+            updated: false
+        };
+    }
 
-    const [show, setShow] = useState(false);
+    componentDidMount() {
+        this.retrieveProductos();
+    }
 
-    return (
+    retrieveProductos() {
+        TecsoftDataService.getAll()
+            .then(response => {
+                this.setState({
+                    productos: response.data,
+                    updated:false
+                });
+                console.log(response.data);
+            })
+            .catch(e => {
+                console.log(e);
+            });
+    }
 
-        <Container>
-            <Row>
+    refreshList() {
+        this.retrieveProducto();
+        this.setState({
+            currentProducto: null,
+            currentIndex: -1
+        });
+    }
 
-                <Form>
-                    <Row>
-                        <Col>
-                            <Form.Label>Id Producto</Form.Label>
-                            <Form.Select size="m">
-                                <option>001</option>
-                                <option>002</option>
-                                <option>003</option>
-                            </Form.Select>
-                        </Col>
-                        <Col>
-                            <Form.Group className="mb-3" controlId="formGroupValor">
-                                <Form.Label>Valor Unitario</Form.Label>
-                                <Form.Control type="text" placeholder="Valor Unitario" />
-                            </Form.Group>
-                        </Col>
-                        <Col>
-                            <Form.Group className="mb-3" controlId="formGroupNombre">
-                                <Form.Label>Nombre Producto</Form.Label>
-                                <Form.Control type="text" placeholder="Nombre" />
-                            </Form.Group>
-                        </Col>
-                    </Row>
-                </Form>
-
-                <Form>
-                    <Row>
-                        <Col>
-                            <Form.Group className="mb-3" controlId="formGroupValor">
-                                <Form.Label>Descripcion</Form.Label>
-                                <Form.Control type="text" placeholder="Descripcion" />
-                            </Form.Group>
-                        </Col>
-                        <Col>
-                            <Form.Group className="mb-3" controlId="formGroupValor">
-                                <Form.Label>Cantidad</Form.Label>
-                                <Form.Control type="text" placeholder="Cantidad" />
-                            </Form.Group>
-                        </Col>
-                    </Row>
-                </Form>
-
-                <Form>
-                    <Row>
-                        <Col>
-                            <Button variant="outline-dark" size="lg" onClick={() => setShow(true)}>
-                                Actualizar Producto
-                            </Button>
-                        </Col>
-                    </Row>
-                </Form>
-            </Row>
-
-            <Col xs={4} className="toastTst">
-                <Toast onClose={() => setShow(false)} show={show} delay={3000} autohide>
-                    <Toast.Header>
-                        <strong className="me-auto">Correcto</strong>
-                        <small>Ahora</small>
-                    </Toast.Header>
-                    <Toast.Body>Producto actualizado con exito</Toast.Body>
-                </Toast>
-            </Col>
-
-            <Row>
-                <Table striped bordered hover variant="dark">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Id Producto</th>
-                            <th>Nombre</th>
-                            <th>Valor</th>
-                            <th>Descripcion</th>
-                            <th>Cantidad</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>001</td>
-                            <td>Telefono</td>
-                            <td>2000</td>
-                            <td>Et harum quidem rerum facilis est et expedita distinctio</td>
-                            <td>20</td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>002</td>
-                            <td>Computadora</td>
-                            <td>3000</td>
-                            <td>Et harum quidem rerum facilis est et expedita distinctio</td>
-                            <td>30</td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>003</td>
-                            <td>Televisor</td>
-                            <td>5000</td>
-                            <td>Et harum quidem rerum facilis est et expedita distinctio</td>
-                            <td>45</td>
-                        </tr>
-                    </tbody>
-                </Table>
-            </Row>
-        </Container>
-
-        
-    )
-}
-
-function Greeting() {
-        return (
-            <>
-        <ActualizarProducto/>
-            </>
+    updateProductos() {
+        TecsoftDataService.update(
+            this.state.currentProducto.id,
+            this.state.currentProducto
         )
-}
+            .then(response => {
+                console.log(response.data);
+                this.setState({
+                    message: "Producto updated successfully!",
+                    updated: true
+                });
+            })
+            .catch(e => {
+                console.log(e);
+            });
+    }
 
-export default Greeting;
+    onChangeNombre(e) {
+        const nombre = e.target.value;
+        this.setState(function (prevState) {
+            return {
+                currentProducto: {
+                    ...prevState.currentProducto,
+                    nombre: nombre
+                }
+            };
+        });
+    }
+
+    onChangeDescripcion(e) {
+        const descripcion = e.target.value;
+        this.setState(function (prevState) {
+            return {
+                currentProducto: {
+                    ...prevState.currentProducto,
+                    descripcion: descripcion
+                }
+            };
+        });
+    }
+
+    onChangeValor(e) {
+        const valor = e.target.value;
+        this.setState(function (prevState) {
+            return {
+                currentProducto: {
+                    ...prevState.currentProducto,
+                    valor: valor
+                }
+            };
+        });
+    }
+
+    onChangeCantidad(e) {
+        const cantidad = e.target.value;
+        this.setState(function (prevState) {
+            return {
+                currentProducto: {
+                    ...prevState.currentProducto,
+                    cantidad: cantidad
+                }
+            };
+        });
+    }
+
+    setActiveProductos(producto, index) {
+        this.setState({
+            currentProducto: producto,
+            currentIndex: index
+        });
+    }
+
+
+    render() {
+
+        const { productos, currentProducto, currentIndex } = this.state;
+
+        return (
+
+            <div className="listItems">
+                <Container>
+
+                    {this.state.updated ? (
+                        <div className="toastSucess">
+                            <Toast onClose={this.retrieveProductos} className="toastS">
+                                <Toast.Header>
+                                    <strong className="me-auto">Correcto</strong>
+                                    <small>Ahora</small>
+                                </Toast.Header>
+                                <Toast.Body>Producto Actualizado Correctamente</Toast.Body>
+                            </Toast>
+                        </div>
+                    ) : (
+
+                        <div className="Productos">
+                            <Row>
+                                {currentProducto ? (
+                                    <div>
+                                        <Form>
+                                            <Row>
+                                                <Col>
+                                                    <Form.Group className="mb-3" controlId="formGroupID">
+                                                        <Form.Label>Id Producto</Form.Label>
+                                                        <Form.Control type="text"
+                                                            placeholder={currentProducto.id} disabled />
+                                                    </Form.Group>
+                                                </Col>
+                                                <Col>
+                                                    <Form.Group className="mb-3" controlId="formGroupNombre">
+                                                        <Form.Label>Nombre Producto</Form.Label>
+                                                        <Form.Control type="text"
+                                                            value={currentProducto.nombre}
+                                                            onChange={this.onChangeNombre} />
+                                                    </Form.Group>
+                                                </Col>
+                                                <Col>
+                                                    <Form.Group className="mb-3" controlId="formGroupDescripcion">
+                                                        <Form.Label>Descripcion Producto</Form.Label>
+                                                        <Form.Control type="text" 
+                                                            value={currentProducto.descripcion}
+                                                            onChange={this.onChangeDescripcion}
+                                                            />
+                                                    </Form.Group>
+                                                </Col>
+                                            </Row>
+                                        </Form>
+                                        <Form>
+                                            <Row>
+                                                <Col>
+                                                    <Form.Group className="mb-3" controlId="formGroupValor">
+                                                        <Form.Label>Valor Unitario</Form.Label>
+                                                        <Form.Control type="text"
+                                                            value={currentProducto.valor}
+                                                            onChange={this.onChangeValor} />
+                                                    </Form.Group>
+                                                </Col>
+                                                <Col>
+                                                    <Form.Group className="mb-3" controlId="formGroupCantidad">
+                                                        <Form.Label>Cantidad</Form.Label>
+                                                        <Form.Control type="text" 
+                                                            value={currentProducto.cantidad}
+                                                            onChange={this.onChangeCantidad}/>
+                                                    </Form.Group>
+                                                </Col>
+                                            </Row>
+                                        </Form>
+
+                                        <Form>
+                                            <Row>
+                                                <Col>
+                                                    <Button variant="outline-dark"
+                                                        to={"/actualizarproducto/" + currentProducto.id}
+                                                        onClick={this.updateProductos}
+                                                        size="lg">
+                                                        Actualizar Producto
+                                                    </Button>
+                                                </Col>
+                                            </Row>
+                                        </Form>
+                                    </div>
+                                ) : (
+                                    <div>
+                                        <br />
+                                        <p>Selecciona un Producto</p>
+                                    </div>
+                                )}
+
+
+                            </Row>
+                        </div>
+
+                    )}
+
+
+                    <Row>
+                        <ul className="list-group">
+                            {productos && productos.map((producto, index) => (
+
+                                <li
+                                    className={"list-group-item " + (index === currentIndex ? "active" : "")}
+                                    onClick={() => this.setActiveProductos(producto, index)}
+                                    key={index}
+                                >
+                                    <Table striped bordered hover variant="dark">
+                                        <thead>
+                                            <tr>
+                                                <th>Id Producto</th>
+                                                <th>Nombre</th>
+                                                <th>Valor</th>
+                                                <th>Descripcion</th>
+                                                <th>Cantidad</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>{producto.id}</td>
+                                                <td>{producto.nombre}</td>
+                                                <td>{producto.valor}</td>
+                                                <td>{producto.descripcion}</td>
+                                                <td>{producto.cantidad}</td>
+                                            </tr>
+                                        </tbody>
+                                    </Table>
+                                </li>
+
+                            ))}
+                        </ul>
+                    </Row>
+                </Container>
+            </div>
+        );
+
+    }
+}

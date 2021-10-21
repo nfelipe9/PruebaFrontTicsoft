@@ -3,14 +3,20 @@
     text-align: center;
 }
 
-.test {
-    padding-top: 3%;
-}
-
-.toastTst{
-    margin-left: 36%;
-}
-
 .tabless {
     padding-top: 3%;
+}
+
+.toastSucess{
+    justify-content: center;
+    display: flex;
+    padding-top: 3%;
+}
+
+.form{
+    padding-top: 3%;
+}
+
+.listItems{
+    justify-content: center;
 }
