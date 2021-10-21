@@ -239,8 +239,9 @@ export default class MasterAdmin extends Component {
                                     <Table striped bordered hover variant="dark">
                                         <thead>
                                             <tr>
-                                                <th>Id Producto</th>
+                                                <th>Id Usuario</th>
                                                 <th>Nombre</th>
+                                                <th>Apellido</th>
                                                 <th>Email</th>
                                                 <th>Rol</th>
                                             </tr>
@@ -249,6 +250,7 @@ export default class MasterAdmin extends Component {
                                             <tr>
                                                 <td>{usuario.id}</td>
                                                 <td>{usuario.FirstName}</td>
+                                                <td>{usuario.LastName}</td>
                                                 <td>{usuario.Email}</td>
                                                 <td>{usuario.Rol}</td>
                                             </tr>
