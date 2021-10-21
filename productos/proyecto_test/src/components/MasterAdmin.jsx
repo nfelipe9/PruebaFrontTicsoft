@@ -19,9 +19,8 @@ export default class MasterAdmin extends Component {
         this.setActiveUsuarios = this.setActiveUsuarios.bind(this);
         this.updateUsuario = this.updateUsuario.bind(this);
         this.onChangeFirstName = this.onChangeFirstName.bind(this);
-        /* this.onChangeLastName = this.onChangeLastName.bind(this);
         this.onChangeEmail = this.onChangeEmail.bind(this);
-        this.onChangeRol = this.onChangeRol.bind(this); */
+        this.onChangeRol = this.onChangeRol.bind(this);
 
 
         this.state = {
@@ -43,7 +42,7 @@ export default class MasterAdmin extends Component {
             .then(response => {
                 this.setState({
                     usuarios: response.data,
-                    updated:false
+                    updated: false
                 });
                 console.log(response.data);
             })
@@ -89,37 +88,25 @@ export default class MasterAdmin extends Component {
         });
     }
 
-    onChangeDescripcion(e) {
-        const descripcion = e.target.value;
+    onChangeRol(e) {
+        const Rol = e.target.value;
         this.setState(function (prevState) {
             return {
-                currentProducto: {
-                    ...prevState.currentProducto,
-                    descripcion: descripcion
+                currentUsuario: {
+                    ...prevState.currentUsuario,
+                    Rol: Rol
                 }
             };
         });
     }
 
-    onChangeValor(e) {
-        const valor = e.target.value;
+    onChangeEmail(e) {
+        const Email = e.target.value;
         this.setState(function (prevState) {
             return {
-                currentProducto: {
-                    ...prevState.currentProducto,
-                    valor: valor
-                }
-            };
-        });
-    }
-
-    onChangeCantidad(e) {
-        const cantidad = e.target.value;
-        this.setState(function (prevState) {
-            return {
-                currentProducto: {
-                    ...prevState.currentProducto,
-                    cantidad: cantidad
+                currentUsuario: {
+                    ...prevState.currentUsuario,
+                    Email: Email
                 }
             };
         });
@@ -142,46 +129,46 @@ export default class MasterAdmin extends Component {
             <div className="listItems">
                 <Container>
 
-{/*                     {this.state.updated ? (
+                    {this.state.updated ? (
                         <div className="toastSucess">
-                            <Toast onClose={this.retrieveProductos} className="toastS">
+                            <Toast onClose={this.retrieveUsuarios} className="toastS">
                                 <Toast.Header>
                                     <strong className="me-auto">Correcto</strong>
                                     <small>Ahora</small>
                                 </Toast.Header>
-                                <Toast.Body>Producto Actualizado Correctamente</Toast.Body>
+                                <Toast.Body>Usuario Actualizado Correctamente</Toast.Body>
                             </Toast>
                         </div>
                     ) : (
 
-                        <div className="Productos">
+                        <div className="Usuarios">
                             <Row>
-                                {currentProducto ? (
+                                {currentUsuario ? (
                                     <div>
                                         <Form>
                                             <Row>
                                                 <Col>
                                                     <Form.Group className="mb-3" controlId="formGroupID">
-                                                        <Form.Label>Id Producto</Form.Label>
+                                                        <Form.Label>Id Usuario</Form.Label>
                                                         <Form.Control type="text"
-                                                            placeholder={currentProducto.id} disabled />
+                                                            placeholder={currentUsuario.id} disabled />
                                                     </Form.Group>
                                                 </Col>
                                                 <Col>
                                                     <Form.Group className="mb-3" controlId="formGroupNombre">
-                                                        <Form.Label>Nombre Producto</Form.Label>
+                                                        <Form.Label>Nombre Usuario</Form.Label>
                                                         <Form.Control type="text"
-                                                            value={currentProducto.nombre}
-                                                            onChange={this.onChangeNombre} />
+                                                            value={currentUsuario.FirstName}
+                                                            onChange={this.onChangeNombre} disabled />
                                                     </Form.Group>
                                                 </Col>
                                                 <Col>
-                                                    <Form.Group className="mb-3" controlId="formGroupDescripcion">
-                                                        <Form.Label>Descripcion Producto</Form.Label>
-                                                        <Form.Control type="text" 
-                                                            value={currentProducto.descripcion}
-                                                            onChange={this.onChangeDescripcion}
-                                                            />
+                                                    <Form.Group className="mb-3" controlId="formGroupApellido">
+                                                        <Form.Label>Apellido Usuario</Form.Label>
+                                                        <Form.Control type="text"
+                                                            value={currentUsuario.LastName}
+                                                            onChange={this.onChangeLastName} disabled
+                                                        />
                                                     </Form.Group>
                                                 </Col>
                                             </Row>
@@ -189,19 +176,26 @@ export default class MasterAdmin extends Component {
                                         <Form>
                                             <Row>
                                                 <Col>
-                                                    <Form.Group className="mb-3" controlId="formGroupValor">
-                                                        <Form.Label>Valor Unitario</Form.Label>
+                                                    <Form.Label > Seleccion Rol</Form.Label>
+                                                    <Form.Select aria-label="Default example" onChange={this.onChangeRol} >
+                                                        <option>Unauthorized</option>
+                                                        <option value="Vendedor">Vendedor</option>
+                                                        <option value="Administrador">Administrador</option>
+                                                    </Form.Select>
+                                                </Col>
+                                                <Col>
+                                                    <Form.Group className="mb-3" controlId="formGroupRol">
+                                                        <Form.Label>Rol</Form.Label>
                                                         <Form.Control type="text"
-                                                            value={currentProducto.valor}
-                                                            onChange={this.onChangeValor} />
+                                                            value={currentUsuario.Rol} disabled/>
                                                     </Form.Group>
                                                 </Col>
                                                 <Col>
-                                                    <Form.Group className="mb-3" controlId="formGroupCantidad">
-                                                        <Form.Label>Cantidad</Form.Label>
-                                                        <Form.Control type="text" 
-                                                            value={currentProducto.cantidad}
-                                                            onChange={this.onChangeCantidad}/>
+                                                    <Form.Group className="mb-3" controlId="formGroupEmail">
+                                                        <Form.Label>Email</Form.Label>
+                                                        <Form.Control type="text"
+                                                            value={currentUsuario.Email}
+                                                            onChange={this.onChangeEmail} />
                                                     </Form.Group>
                                                 </Col>
                                             </Row>
@@ -211,10 +205,10 @@ export default class MasterAdmin extends Component {
                                             <Row>
                                                 <Col>
                                                     <Button variant="outline-dark"
-                                                        to={"/actualizarproducto/" + currentProducto.id}
-                                                        onClick={this.updateProductos}
+                                                        to={"/actualizarUsuarios/" + currentUsuario.id}
+                                                        onClick={this.updateUsuario}
                                                         size="lg">
-                                                        Actualizar Producto
+                                                        Actualizar Usuario
                                                     </Button>
                                                 </Col>
                                             </Row>
@@ -223,7 +217,7 @@ export default class MasterAdmin extends Component {
                                 ) : (
                                     <div>
                                         <br />
-                                        <p>Selecciona un Producto</p>
+                                        <p>Selecciona un Usuario</p>
                                     </div>
                                 )}
 
@@ -232,7 +226,6 @@ export default class MasterAdmin extends Component {
                         </div>
 
                     )}
- */}
 
                     <Row>
                         <ul className="list-group">

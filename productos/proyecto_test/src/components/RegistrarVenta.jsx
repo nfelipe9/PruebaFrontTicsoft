@@ -258,7 +258,7 @@ export default class RegistrarVenta extends Component {
                                                 <Form.Group className="mb-3" controlId="formGroupNombre">
                                                     <Form.Label>Nombre Vendedor</Form.Label>
                                                     <Form.Control type="text"
-                                                        placeholder={currentUsuario.nombre} disabled />
+                                                        placeholder={currentUsuario.FirstName} disabled />
                                                 </Form.Group>
                                             </Col>) : (
                                             <label></label>

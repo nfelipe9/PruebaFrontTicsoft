@@ -41,8 +41,8 @@ class TecsoftDataService {
     return http.get("/obtenerUsuarios");
   }
 
-  actualizarUsuarios(Email, data) {
-    return http.put(`/actualizarUsuarios/${Email}`, data);
+  actualizarUsuarios(id, data) {
+    return http.put(`/actualizarUsuarios/${id}`, data);
   }
 
 
